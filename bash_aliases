@@ -23,13 +23,13 @@ alias nv='nano ~/.vimrc'
 alias cdh='cd /mnt/c/Users/$winusr'
 alias mc='cd /mnt/c/Users/$winusr/Documents/MyCode/'
 alias dot='mc;cd dotfiles/'
+alias appdata='cd /mnt/Users/$winusr/AppData/'
 
 #quicklaunch
 alias e='/mnt/c/Windows/explorer.exe'
 alias vc='code'
 alias py='python3'
 alias v='vim'
-alias vcr='vc /mnt/Users/$winusr/AppData/Local/Packages/CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc/LocalState/rootfs/'
 
 #System
 alias c="clear"
