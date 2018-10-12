@@ -1,12 +1,15 @@
+#vars
+export winusr="$(cmd.exe /c "<nul set /p=%username%" 2>/dev/null)"
+
 #dotfiles_update
-alias .upv='cp ~/.vimrc /mnt/c/Users/ThatGuy/Documents/MyCode/dotfiles/vimrc'
-alias .upb='cp ~/.bashrc /mnt/c/Users/ThatGuy/Documents/MyCode/dotfiles/bashrc'
-alias .upa='cp ~/.bash_aliases /mnt/c/Users/ThatGuy/Documents/MyCode/dotfiles/bash_aliases'
+alias .upv='cp ~/.vimrc /mnt/c/Users/$winusr/Documents/MyCode/dotfiles/vimrc'
+alias .upb='cp ~/.bashrc /mnt/c/Users/$winusr/Documents/MyCode/dotfiles/bashrc'
+alias .upa='cp ~/.bash_aliases /mnt/c/Users/$winusr/Documents/MyCode/dotfiles/bash_aliases'
 alias .up='.upv;.upb;.upa'
 
-alias .dv='cp /mnt/c/Users/ThatGuy/Documents/MyCode/dotfiles/vimrc ~/.vimrc'
-alias .db='cp /mnt/c/Users/ThatGuy/Documents/MyCode/dotfiles/bashrc ~/.bashrc'
-alias .da='cp /mnt/c/Users/ThatGuy/Documents/MyCode/dotfiles/bash_aliases ~/.bash_aliases'
+alias .dv='cp /mnt/c/Users/$winusr/Documents/MyCode/dotfiles/vimrc ~/.vimrc'
+alias .db='cp /mnt/c/Users/$winusr/Documents/MyCode/dotfiles/bashrc ~/.bashrc'
+alias .da='cp /mnt/c/Users/$winusr/Documents/MyCode/dotfiles/bash_aliases ~/.bash_aliases'
 alias .d='.dv; .db; .da'
 
 #quickedit
@@ -17,8 +20,8 @@ alias sb='source ~/.bashrc'
 alias nv='nano ~/.vimrc'
 
 #quickchange
-alias cdh='cd /mnt/c/Users/ThatGuy'
-alias mc='cd /mnt/c/Users/ThatGuy/Documents/MyCode/'
+alias cdh='cd /mnt/c/Users/$winusr'
+alias mc='cd /mnt/c/Users/$winusr/Documents/MyCode/'
 alias dot='mc;cd dotfiles/'
 
 #quicklaunch
@@ -26,7 +29,7 @@ alias e='/mnt/c/Windows/explorer.exe'
 alias vc='code'
 alias py='python3'
 alias v='vim'
-alias vcr='vc /mnt/Users/ThatGuy/AppData/Local/Packages/CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc/LocalState/rootfs/'
+alias vcr='vc /mnt/Users/$winusr/AppData/Local/Packages/CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc/LocalState/rootfs/'
 
 #System
 alias c="clear"
