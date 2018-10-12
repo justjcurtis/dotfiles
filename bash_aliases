@@ -2,15 +2,23 @@
 export winusr="$(cmd.exe /c "<nul set /p=%username%" 2>/dev/null)"
 
 #dotfiles_update
-alias .upv='cp ~/.vimrc /mnt/c/Users/$winusr/Documents/MyCode/dotfiles/vimrc'
-alias .upb='cp ~/.bashrc /mnt/c/Users/$winusr/Documents/MyCode/dotfiles/bashrc'
-alias .upa='cp ~/.bash_aliases /mnt/c/Users/$winusr/Documents/MyCode/dotfiles/bash_aliases'
+alias .upv='cp ~/.vimrc /mnt/c/Users/$winusr/Documents/dotfiles/vimrc'
+alias .upb='cp ~/.bashrc /mnt/c/Users/$winusr/Documents/dotfiles/bashrc'
+alias .upa='cp ~/.bash_aliases /mnt/c/Users/$winusr/Documents/dotfiles/bash_aliases'
 alias .up='.upv;.upb;.upa'
+alias .upv.='cp ~/.vimrc ./vimrc'
+alias .upb.='cp ~/.bashrc ./bashrc'
+alias .upa.='cp ~/.bash_aliases ./bash_aliases'
+alias .up.='.upv.;.upb.;.upa.'
 
-alias .dv='cp /mnt/c/Users/$winusr/Documents/MyCode/dotfiles/vimrc ~/.vimrc'
-alias .db='cp /mnt/c/Users/$winusr/Documents/MyCode/dotfiles/bashrc ~/.bashrc'
-alias .da='cp /mnt/c/Users/$winusr/Documents/MyCode/dotfiles/bash_aliases ~/.bash_aliases'
+alias .dv='cp /mnt/c/Users/$winusr/Documents/dotfiles/vimrc ~/.vimrc'
+alias .db='cp /mnt/c/Users/$winusr/Documents/dotfiles/bashrc ~/.bashrc'
+alias .da='cp /mnt/c/Users/$winusr/Documents/dotfiles/bash_aliases ~/.bash_aliases'
 alias .d='.dv; .db; .da'
+alias .dv.='cp ./vimrc ~/.vimrc'
+alias .db.='cp ./bashrc ~/.bashrc'
+alias .da.='cp ./bash_aliases ~/.bash_aliases'
+alias .d.='.dv.; .db.; .da.'
 
 #quickedit
 alias na='nano ~/.bash_aliases'
@@ -21,8 +29,7 @@ alias nv='nano ~/.vimrc'
 
 #quickchange
 alias cdh='cd /mnt/c/Users/$winusr'
-alias mc='cd /mnt/c/Users/$winusr/Documents/MyCode/'
-alias dot='mc;cd dotfiles/'
+alias dot='cdh;cd Documents/dotfiles/'
 alias appdata='cd /mnt/Users/$winusr/AppData/'
 
 #quicklaunch
@@ -49,6 +56,7 @@ alias gRa="g remote add"
 
 ##git control
 alias gs="g status"
+alias gss="g fetch;gs"
 alias grm="g rm"
 alias grm.="grm ."
 alias ga="g add"
