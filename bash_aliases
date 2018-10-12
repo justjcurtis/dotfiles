@@ -4,6 +4,11 @@ alias .upb='cp ~/.bashrc /mnt/c/Users/ThatGuy/Documents/MyCode/dotfiles/bashrc'
 alias .upa='cp ~/.bash_aliases /mnt/c/Users/ThatGuy/Documents/MyCode/dotfiles/bash_aliases'
 alias .up='.upv;.upb;.upa'
 
+alias .dv='cp /mnt/c/Users/ThatGuy/Documents/MyCode/dotfiles/vimrc ~/.vimrc'
+alias .db='cp /mnt/c/Users/ThatGuy/Documents/MyCode/dotfiles/bashrc ~/.bashrc'
+alias .da='cp /mnt/c/Users/ThatGuy/Documents/MyCode/dotfiles/bash_aliases ~/.bash_aliases'
+alias .d='.dv; .db; .da'
+
 #quickedit
 alias na='nano ~/.bash_aliases'
 alias nb='nano ~/.bashrc'
@@ -14,6 +19,7 @@ alias nv='nano ~/.vimrc'
 #quickchange
 alias cdh='cd /mnt/c/Users/ThatGuy'
 alias mc='cd /mnt/c/Users/ThatGuy/Documents/MyCode/'
+alias dot='mc;cd dotfiles/'
 
 #quicklaunch
 alias e='/mnt/c/Windows/explorer.exe'
