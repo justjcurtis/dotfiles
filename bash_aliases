@@ -20,6 +20,7 @@ alias e='/mnt/c/Windows/explorer.exe'
 alias vc='code'
 alias py='python3'
 alias v='vim'
+alias vcr='vc /mnt/Users/ThatGuy/AppData/Local/Packages/CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc/LocalState/rootfs/'
 
 #System
 alias c="clear"
