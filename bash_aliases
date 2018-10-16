@@ -28,9 +28,11 @@ alias sb='source ~/.bashrc'
 alias nv='nano ~/.vimrc'
 
 #quickchange
-alias cdh='cd /mnt/c/Users/$winusr'
+alias cdh='cd /mnt/c/Users/$winusr/'
 alias dot='cdh;cd Documents/dotfiles/'
 alias appdata='cd /mnt/Users/$winusr/AppData/'
+alias cdd='cd /mnt/c/Users/$winusr/Documents/'
+alias cdp='cd ..'
 
 #quicklaunch
 alias e='/mnt/c/Windows/explorer.exe'
