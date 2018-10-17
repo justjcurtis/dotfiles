@@ -21,11 +21,11 @@ alias .da.='sudo cp ./bash_aliases ~/.bash_aliases'
 alias .d.='.dv.; .db.; .da.'
 
 #quickedit
-alias na='nano ~/.bash_aliases'
-alias nb='nano ~/.bashrc'
+alias na='sudo nano ~/.bash_aliases'
+alias nb='sudo nano ~/.bashrc'
 alias sa='source ~/.bash_aliases'
 alias sb='source ~/.bashrc'
-alias nv='nano ~/.vimrc'
+alias nv='sudo nano ~/.vimrc'
 
 #quickchange
 alias cdh='cd /mnt/c/Users/$winusr/'
