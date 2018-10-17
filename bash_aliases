@@ -63,7 +63,8 @@ alias grm="g rm"
 alias grm.="grm ."
 alias ga="g add"
 alias ga.="ga ."
-alias gcof.="gco -f ."
+alias gcof='gco -f'
+alias gcof.="gcof ."
 alias gr="g reset"
 alias gbk="gr HEAD~"
 alias gfw="gr 'HEAD@{1}'"
@@ -74,6 +75,8 @@ alias gl="g log"
 alias cg="c;gs"
 alias ghi="gf;c;ginfo"
 alias ginfo="gf;gbr;gb;gs"
+alias gmc='git diff --diff-filter=U'
+alias gmcn='gmc --name-only'
 
 ##git commit
 alias gC="g commit"
