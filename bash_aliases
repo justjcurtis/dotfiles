@@ -55,6 +55,9 @@ alias gc="g clone"
 alias gi="g init"
 alias gI="cp '~/gitignore' '.gitignore'"
 alias gRa="g remote add"
+alias gU='f(){ g config credential.${remote}.username $1; g config credential.helper store; }; f'
+alias ggunset="g config --global --unset credential.helper"
+alias grunset="g config --unset credential.helper"
 
 ##git control
 alias gs="g status"
