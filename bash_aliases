@@ -44,9 +44,12 @@ alias v='vim'
 alias c="clear"
 alias x="exit"
 alias h="history"
+alias hg="h | grep"
 alias bc="bc -l"
 alias fastping='ping -c 100 -s.2'
 alias wget='wget -c'
+alias targz='f() { tar -zcvf $1.tar.gz $1; rm -r $1; }; f'
+alias untargz='f() { tar -zxvf $1; rm -r $1; }; f'
 
 #FileSystem
 alias mkcd='_(){ mkdir $1; cd $1; }; _'
@@ -79,11 +82,15 @@ alias grh="gr --soft HEAD"
 alias gid="g rev-parse HEAD"
 alias gids="g rev-parse --short HEAD"
 alias gl="g log"
+alias glg="gl | grep"
 alias cg="c;gs"
 alias ghi="gf;c;ginfo"
 alias ginfo="gf;gbr;gb;gs"
 alias gmc='git diff --diff-filter=U'
 alias gmcn='gmc --name-only'
+alias gfc="gf;cg"
+alias cgs="cg -s"
+alias gfcs="gf;cgs"
 
 ##git commit
 alias gC="g commit"
@@ -97,9 +104,13 @@ alias gP="g push"
 
 ##git branch
 alias gb="g branch"
+alias gba="gb -a"
+alias gbag="gba | grep"
+alias gbg="gb | grep"
 alias gbd="gb -D"
 alias gbrd="gP origin --delete"
 alias gbr="gb -r"
+alias gbrg="gbr | grep"
 alias gbv="gb -vv"
 alias gbm="gb -m"
 alias gbrm="gP origin :"
