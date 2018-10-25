@@ -32,7 +32,7 @@ alias cdh='cd /mnt/c/Users/$winusr/'
 alias dot='cdh;cd Documents/dotfiles/'
 alias appdata='cd /mnt/Users/$winusr/AppData/'
 alias cdd='cd /mnt/c/Users/$winusr/Documents/'
-alias cdp='cd ..'
+alias ..='cd ..'
 
 #quicklaunch
 alias e='/mnt/c/Windows/explorer.exe'
@@ -43,6 +43,10 @@ alias v='vim'
 #System
 alias c="clear"
 alias x="exit"
+alias h="history"
+alias bc="bc -l"
+alias fastping='ping -c 100 -s.2'
+alias wget='wget -c'
 
 #FileSystem
 alias mkcd='_(){ mkdir $1; cd $1; }; _'
