@@ -57,7 +57,7 @@ alias f="find"
 alias ff='f . -type f -iname'
 alias fd='f . -type d -iname'
 alias fa='f . -iname'
-alias fg='_() { f -iname $1 | grep $2; }; _'
+alias fg='_() { f | grep $1; }; _'
 
 #Git
 alias g="hub"
