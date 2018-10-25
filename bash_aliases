@@ -115,9 +115,11 @@ alias gSc="gS clear"
 alias gSs="gS;gSa 0"
 alias gScs="gSc;gS"
 alias gSr="gSc;gSs"
-alias gSsw="f() { git stash show stash^{/$*} -p; }; f"
-alias gSap="f() { git stash apply stash^{/$*}; }; f"
+alias gSsw="f() { g stash show stash^{/$*} -p; }; f"
+alias gSap="f() { g stash apply stash^{/$*}; }; f"
 alias gSsv="gS save"
+alias gSd='f() { g stash drop stash@{$1}; }; f'
+alias gSds'f() { g stash drop stash^{/$*}; }; f'
 
 ##git misc
 alias k="gitk"
