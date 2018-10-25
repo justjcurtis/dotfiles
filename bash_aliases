@@ -91,6 +91,9 @@ alias gmcn='gmc --name-only'
 alias gfc="gf;cg"
 alias cgs="cg -s"
 alias gfcs="gf;cgs"
+alias gsg="gs | grep"
+alias cgg="cg | grep"
+alias gDrop="ga.;gS;gSd 0"
 
 ##git commit
 alias gC="g commit"
