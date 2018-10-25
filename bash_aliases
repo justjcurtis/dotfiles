@@ -53,8 +53,11 @@ alias untargz='f() { tar -zxvf $1; rm -r $1; }; f'
 
 #FileSystem
 alias mkcd='_(){ mkdir $1; cd $1; }; _'
-alias ff='find . -type f -iname'
-alias fd='find . -type d -iname'
+alias f="find"
+alias ff='f . -type f -iname'
+alias fd='f . -type d -iname'
+alias fa='f . -iname'
+alias fg='_() { f -iname $1 | grep $2; }; _'
 
 #Git
 alias g="hub"
