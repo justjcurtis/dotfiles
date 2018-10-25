@@ -107,6 +107,7 @@ alias gm="g merge"
 alias gPsuo="gP --set-upstream origin"
 
 ##git stash
+alias sgrep='f() { ref=$(g --no-pager stash list | grep "$1" | cut -d: -f1 | head -n1); echo ${ref:-<no_match>}; }; f'
 alias gS="g stash"
 alias gSl="gS list"
 alias gSp="gS pop"
@@ -119,7 +120,7 @@ alias gSsw="f() { g stash show stash^{/$*} -p; }; f"
 alias gSap="f() { g stash apply stash^{/$*}; }; f"
 alias gSsv="gS save"
 alias gSd='f(){ g stash drop stash@{$1}; }; f'
-alias gSds='f(){ g stash drop stash^{/$*}; }; f'
+alias gSds='f() { git stash drop $(sgrep $1); }; f'
 
 ##git misc
 alias k="gitk"
