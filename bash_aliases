@@ -58,7 +58,8 @@ alias ff='f . -type f -iname'
 alias fd='f . -type d -iname'
 alias fa='f . -iname'
 alias fg='_() { f | grep $1; }; _'
-
+alias ffg='_() { f -type f | grep $*; }; _'
+alias fdg='_() { f -type d | grep $*; }; _'
 #Git
 alias g="hub"
 
