@@ -23,9 +23,12 @@ alias .d.='.dv.; .db.; .da.'
 #quickedit
 alias na='sudo nano ~/.bash_aliases'
 alias nb='sudo nano ~/.bashrc'
+alias va='sudo v ~/.bash_aliases'
+alias vb='sudo v ~/.bashrc'
 alias sa='source ~/.bash_aliases'
 alias sb='source ~/.bashrc'
 alias nv='sudo nano ~/.vimrc'
+alias vv='sudo v ~/.vimrc'
 
 #quickchange
 alias cdh='cd /mnt/c/Users/$winusr/'
@@ -39,6 +42,7 @@ alias e='/mnt/c/Windows/explorer.exe'
 alias vc='code'
 alias py='python3'
 alias v='vim'
+alias n='nano'
 
 #System
 alias c="clear"
