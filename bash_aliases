@@ -23,12 +23,12 @@ alias .d.='.dv.; .db.; .da.'
 #quickedit
 alias na='sudo nano ~/.bash_aliases'
 alias nb='sudo nano ~/.bashrc'
-alias va='sudo v ~/.bash_aliases'
-alias vb='sudo v ~/.bashrc'
+alias va='sudo vim ~/.bash_aliases'
+alias vb='sudo vim ~/.bashrc'
 alias sa='source ~/.bash_aliases'
 alias sb='source ~/.bashrc'
 alias nv='sudo nano ~/.vimrc'
-alias vv='sudo v ~/.vimrc'
+alias vv='sudo vim ~/.vimrc'
 
 #quickchange
 alias cdh='cd /mnt/c/Users/$winusr/'
