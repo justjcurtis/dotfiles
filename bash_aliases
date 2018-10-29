@@ -1,19 +1,20 @@
 #vars
 export winusr="$(cmd.exe /c "<nul set /p=%username%" 2>/dev/null)"
+export home="$(uname -a | awk -v var="$winusr" '{ if($3 ~ /Microsoft/) print "/mnt/c/Users/"var ; else print "~"}')"
 
 #dotfiles_update
-alias .upv='cp ~/.vimrc /mnt/c/Users/$winusr/Documents/dotfiles/vimrc'
-alias .upb='cp ~/.bashrc /mnt/c/Users/$winusr/Documents/dotfiles/bashrc'
-alias .upa='cp ~/.bash_aliases /mnt/c/Users/$winusr/Documents/dotfiles/bash_aliases'
+alias .upv='cp ~/.vimrc $home/Documents/dotfiles/vimrc'
+alias .upb='cp ~/.bashrc $home/Documents/dotfiles/bashrc'
+alias .upa='cp ~/.bash_aliases $home/Documents/dotfiles/bash_aliases'
 alias .up='.upv;.upb;.upa'
 alias .upv.='cp ~/.vimrc ./vimrc'
 alias .upb.='cp ~/.bashrc ./bashrc'
 alias .upa.='cp ~/.bash_aliases ./bash_aliases'
 alias .up.='.upv.;.upb.;.upa.'
 
-alias .dv='sudo cp /mnt/c/Users/$winusr/Documents/dotfiles/vimrc ~/.vimrc'
-alias .db='sudo cp /mnt/c/Users/$winusr/Documents/dotfiles/bashrc ~/.bashrc'
-alias .da='sudo cp /mnt/c/Users/$winusr/Documents/dotfiles/bash_aliases ~/.bash_aliases'
+alias .dv='sudo cp $home/Documents/dotfiles/vimrc ~/.vimrc'
+alias .db='sudo cp $home/Documents/dotfiles/bashrc ~/.bashrc'
+alias .da='sudo cp $home/Documents/dotfiles/bash_aliases ~/.bash_aliases'
 alias .d='.dv; .db; .da'
 alias .dv.='sudo cp ./vimrc ~/.vimrc'
 alias .db.='sudo cp ./bashrc ~/.bashrc'
@@ -31,10 +32,10 @@ alias nv='sudo nano ~/.vimrc'
 alias vv='sudo vim ~/.vimrc'
 
 #quickchange
-alias cdh='cd /mnt/c/Users/$winusr/'
+alias cdh='cd $home'
 alias dot='cdh;cd Documents/dotfiles/'
-alias appdata='cd /mnt/Users/$winusr/AppData/'
-alias cdd='cd /mnt/c/Users/$winusr/Documents/'
+alias appdata='cd $home/AppData/'
+alias cdd='cd $home/Documents/'
 alias ..='cd ..'
 
 #quicklaunch
