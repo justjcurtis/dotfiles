@@ -33,7 +33,7 @@ alias vv='sudo vim ~/.vimrc'
 
 #quickchange
 alias cdh='cd $home'
-alias dot='cdh;cd Documents/dotfiles/'
+alias dot='cd $home/Documents/dotfiles/'
 alias appdata='cd $home/AppData/'
 alias cdd='cd $home/Documents/'
 alias ..='cd ..'
@@ -77,6 +77,8 @@ alias gRa="g remote add"
 alias gU='f(){ g config credential.${remote}.username $1; g config credential.helper store; }; f'
 alias ggunset="g config --global --unset credential.helper"
 alias grunset="g config --unset credential.helper"
+alias gguser="g config --global user.name"
+alias gruser="g config credential.${remote}.username"
 
 ##git control
 alias gs="g status"
