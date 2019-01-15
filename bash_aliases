@@ -22,6 +22,8 @@ alias .da.='sudo cp ./bash_aliases ~/.bash_aliases'
 alias .d.='.dv.; .db.; .da.'
 
 #quickedit
+alias nl='sudo nano ~/.local_aliases'
+alias vl='sudo vim ~/.local_aliases'
 alias na='sudo nano ~/.bash_aliases'
 alias nb='sudo nano ~/.bashrc'
 alias va='sudo vim ~/.bash_aliases'
