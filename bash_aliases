@@ -57,6 +57,7 @@ alias targz='f() { tar -zcvf $1.tar.gz $1; rm -r $1; }; f'
 alias untargz='f() { tar -zxvf $1; rm -r $1; }; f'
 
 #FileSystem
+alias delhid="find . -maxdepth 1 -name '*._*' -delete"
 alias mkcd='_(){ mkdir $1; cd $1; }; _'
 alias f="find"
 alias ff='f . -type f -iname'
@@ -133,6 +134,7 @@ alias gco="g checkout"
 alias gD="gco development"
 alias gcob="gco -b"
 alias gm="g merge"
+alias gmd="gm development"
 alias gPsuo="gP --set-upstream origin"
 
 ##git stash
