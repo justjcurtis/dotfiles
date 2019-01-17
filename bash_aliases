@@ -15,11 +15,11 @@ alias .up.='.upv.;.upb.;.upa.'
 alias .dv='sudo cp ~/Documents/dotfiles/vimrc ~/.vimrc'
 alias .db='sudo cp ~/Documents/dotfiles/bashrc ~/.bashrc'
 alias .da='sudo cp ~/Documents/dotfiles/bash_aliases ~/.bash_aliases'
-alias .d='.dv; .db; .da'
+alias .d='.dv; .db; .da;sb'
 alias .dv.='sudo cp ./vimrc ~/.vimrc'
 alias .db.='sudo cp ./bashrc ~/.bashrc'
 alias .da.='sudo cp ./bash_aliases ~/.bash_aliases'
-alias .d.='.dv.; .db.; .da.'
+alias .d.='.dv.; .db.; .da.;sb'
 
 #quickedit
 alias nl='sudo nano ~/.local_aliases'
@@ -57,6 +57,7 @@ alias fastping='ping -c 100 -s.2'
 alias wget='wget -c'
 alias targz='f() { tar -zcvf $1.tar.gz $1; rm -r $1; }; f'
 alias untargz='f() { tar -zxvf $1; rm -r $1; }; f'
+alias unlockbrew='rm -rf /usr/local/var/homebrew/locks'
 
 #FileSystem
 alias delhid="find . -maxdepth 1 -name '*._*' -delete"
@@ -91,6 +92,7 @@ alias ga="g add"
 alias ga.="ga ."
 alias gcof='gco -f'
 alias gcof.="gcof ."
+alias gd="g diff"
 alias gr="g reset"
 alias gbk="gr HEAD~"
 alias gfw="gr 'HEAD@{1}'"
