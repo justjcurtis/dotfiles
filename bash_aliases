@@ -69,6 +69,10 @@ alias fa='f . -iname'
 alias fg='_() { f | grep $*; }; _'
 alias ffg='_() { f -type f | grep $*; }; _'
 alias fdg='_() { f -type d | grep $*; }; _'
+alias lg='_() { ls | grep $*; }; _'
+alias lag='_() { ls -a | grep $*; }; _'
+alias llg='_() { ls -l | grep $*; }; _'
+
 #Git
 alias g="hub"
 
@@ -122,6 +126,8 @@ alias gCam="gC -a -m"
 alias gf="g fetch"
 alias gp="g pull"
 alias gP="g push"
+alias gpr="g pr list"
+alias gprg="gpr | grep"
 
 ##git branch
 alias gb="g branch"
