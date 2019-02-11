@@ -171,7 +171,7 @@ alias k="gitk"
 #FUNCS
 
 #Git-Funcs
-alias gB='_(){ gcob "$1"; gPsuo "$1"; gb; gbr; gs; }; _'
+alias gB='_(){ gcob "$1"; gPsuo "$1"; cg; }; _'
 alias gbM='_(){ gco "$1"; gbm "$2"; gbrd "$1"; gco "$2"; gPou "$2"; }; _'
 alias gpbM='_(){ gp; gco "$1"; gbm "$2"; gbrd "$1"; gco "$2"; gPou "$2"; }; _' 
 alias gcorb='_(){ g checkout -b "$1" "origin/$1";}; _'
