@@ -61,6 +61,7 @@ alias unlockbrew='rm -rf /usr/local/var/homebrew/locks'
 
 #FileSystem
 alias delhid="find . -maxdepth 1 -name '*._*' -delete"
+alias delds='find . -name '.DS_Store' -delete'
 alias mkcd='_(){ mkdir $1; cd $1; }; _'
 alias f="find"
 alias ff='f . -type f -iname'
@@ -85,7 +86,9 @@ alias gU='f(){ g config credential.${remote}.username $1; g config credential.he
 alias ggunset="g config --global --unset credential.helper"
 alias grunset="g config --unset credential.helper"
 alias gguser="g config --global user.name"
-alias gruser="g config credential.${remote}.username"
+alias gruser="g config user.name"
+alias ggemail='g config --global user.email'
+alias gremail='g config user.email'
 
 ##git control
 alias gs="g status"
