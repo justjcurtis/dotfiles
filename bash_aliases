@@ -58,6 +58,7 @@ alias wget='wget -c'
 alias targz='f() { tar -zcvf $1.tar.gz $1; rm -r $1; }; f'
 alias untargz='f() { tar -zxvf $1; rm -r $1; }; f'
 alias unlockbrew='rm -rf /usr/local/var/homebrew/locks'
+alias ct='crontab'
 
 #FileSystem
 alias delhid="find . -maxdepth 1 -name '*._*' -delete"
