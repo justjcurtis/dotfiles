@@ -34,6 +34,8 @@ alias sa='source ~/.bash_aliases'
 alias sb='source ~/.bashrc'
 alias nv='sudo nano ~/.vimrc'
 alias vv='sudo vim ~/.vimrc'
+alias ng='sudo vim ~/.gitignore'
+alias vg='sudo vim ~/.gitignore'
 
 #quickchange
 alias cdh='cd ~'
@@ -61,6 +63,7 @@ alias targz='f() { tar -zcvf $1.tar.gz $1; rm -r $1; }; f'
 alias untargz='f() { tar -zxvf $1; rm -r $1; }; f'
 alias unlockbrew='rm -rf /usr/local/var/homebrew/locks'
 alias ct='crontab'
+alias globalgi='git config --global core.excludesfile ~/.gitignore'
 
 #FileSystem
 alias delhid="find . -maxdepth 1 -name '*._*' -delete"
@@ -124,6 +127,9 @@ alias gsg="gs | grep"
 alias cgg="cg | grep"
 alias gDrop="ga.;gS;gSd 0"
 alias gt='g tag'
+alias gignore='g update-index --assume-unchanged'
+alias gunignore='g update-index --no-assume-unchanged'
+alias gignored='g !git ls-files -v | grep "^[[:lower:]]"'
 
 ##git commit
 alias gC="g commit"
