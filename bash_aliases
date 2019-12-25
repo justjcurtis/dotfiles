@@ -52,6 +52,7 @@ alias v='vim'
 alias n='nano'
 
 #System
+alias music="gcc -xc -oa -<<<'i;g(x,t,o){return(3&x&(i*((3&i>>16?\"BY}6YB6%\":\"Qj}6jQ6%\")[t%8]+51)>>o))<<4;}main(n,s){for(;;)putchar(g(1,n=++i>>14,12)+g(s=i>>17,n^i>>13,10)+g(s/3,n+(i>>11)%3,10)+g(s/5,8+n-(i>>10)%3,9));}';./a|aplay"
 alias c="clear"
 alias x="exit"
 alias h="history"
