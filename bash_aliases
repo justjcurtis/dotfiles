@@ -108,6 +108,8 @@ alias gcof='gco -f'
 alias gcof.="gcof ."
 alias gd="g diff"
 alias gr="g reset"
+alias grhard="gr --hard"
+alias grsoft="gr --soft"
 alias gl='g log'
 alias gbk="gr HEAD~"
 alias gfw="gr 'HEAD@{1}'"
@@ -160,7 +162,7 @@ alias gbrm="gP origin :"
 alias gPou="gP origin -u"
 alias gco="g checkout"
 alias gD="gco development"
-alias gcob="gco -b"
+alias gcob='f() { gco -b "$1" "origin/$1" }'
 alias gm="g merge"
 alias gmd="gm development"
 alias gPsuo="gP --set-upstream origin"
@@ -187,7 +189,7 @@ alias k="gitk"
 #FUNCS
 
 #Git-Funcs
-alias gB='_(){ gcob "$1"; gPsuo "$1"; cg; }; _'
+alias gB='_(){ gco -b "$1"; gPsuo "$1"; cg; }; _'
 alias gbM='_(){ gco "$1"; gbm "$2"; gbrd "$1"; gco "$2"; gPou "$2"; }; _'
 alias gpbM='_(){ gp; gco "$1"; gbm "$2"; gbrd "$1"; gco "$2"; gPou "$2"; }; _' 
 alias gcorb='_(){ g checkout -b "$1" "origin/$1";}; _'

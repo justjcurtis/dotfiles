@@ -93,6 +93,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 export PATH=$PATH:~/Documents/myc/flutter/bin
+export PATH="/usr/local/anaconda3/bin:$PATH"
 
 CDPATH=".:~"
 
