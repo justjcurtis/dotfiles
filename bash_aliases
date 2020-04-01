@@ -99,6 +99,7 @@ alias g="hub"
 ##git setup
 alias gc="g clone"
 alias gi="g init"
+alias gir="g create"
 alias gI="cp '~/gitignore' '.gitignore'"
 alias gRa="g remote add"
 alias gU='f(){ g config credential.${remote}.username $1; g config credential.helper store; }; f'
