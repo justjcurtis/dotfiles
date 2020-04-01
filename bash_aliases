@@ -54,16 +54,28 @@ alias n='nano'
 #System
 alias music="gcc -xc -oa -<<<'i;g(x,t,o){return(3&x&(i*((3&i>>16?\"BY}6YB6%\":\"Qj}6jQ6%\")[t%8]+51)>>o))<<4;}main(n,s){for(;;)putchar(g(1,n=++i>>14,12)+g(s=i>>17,n^i>>13,10)+g(s/3,n+(i>>11)%3,10)+g(s/5,8+n-(i>>10)%3,9));}';./a|aplay"
 alias c="clear"
+alias cl="c; ls"
+alias ca="c; la"
 alias x="exit"
+alias j="jobs -l"
+alias pth='echo -e ${PATH//:/\\n}'
+alias now='date +"%T"'
+alias nowdate='date +"%d-%m-%Y"'
 alias h="history"
 alias hg="h | grep"
 alias bc="bc -l"
+alias sha='shasum -a 256 '
 alias fastping='ping -c 100 -s.2'
 alias wget='wget -c'
 alias targz='f() { tar -zcvf $1.tar.gz $1; rm -r $1; }; f'
 alias untargz='f() { tar -zxvf $1; rm -r $1; }; f'
 alias unlockbrew='rm -rf /usr/local/var/homebrew/locks'
 alias ct='crontab'
+alias meminfo='free -m -l -t'
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+alias pscpu='ps auxf | sort -nr -k 3'
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
 alias globalgi='git config --global core.excludesfile ~/.gitignore'
 
 #FileSystem
