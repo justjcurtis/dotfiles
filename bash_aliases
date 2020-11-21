@@ -36,6 +36,7 @@ alias nv='sudo nano ~/.vimrc'
 alias vv='sudo vim ~/.vimrc'
 alias ng='sudo vim ~/.gitignore'
 alias vg='sudo vim ~/.gitignore'
+alias ignore='vim .gitignore'
 
 #quickchange
 alias cdh='cd ~'
@@ -58,6 +59,7 @@ alias cl="c; ls"
 alias ca="c; la"
 alias x="exit"
 alias j="jobs -l"
+alias kl="killall -9"
 alias pth='echo -e ${PATH//:/\\n}'
 alias now='date +"%T"'
 alias nowdate='date +"%d-%m-%Y"'
@@ -65,7 +67,7 @@ alias h="history"
 alias hg="h | grep"
 alias bc="bc -l"
 alias sha='shasum -a 256 '
-alias fastping='ping -c 100 -s.2'
+alias fastping='ping -c 100 -s'
 alias wget='wget -c'
 alias targz='f() { tar -zcvf $1.tar.gz $1; rm -r $1; }; f'
 alias untargz='f() { tar -zxvf $1; rm -r $1; }; f'
@@ -92,6 +94,15 @@ alias fdg='_() { f -type d | grep $*; }; _'
 alias lg='_() { ls | grep $*; }; _'
 alias lag='_() { ls -a | grep $*; }; _'
 alias llg='_() { ls -l | grep $*; }; _'
+
+#tmux
+alias t="tmux"
+alias tls="t ls"
+alias ta="t a"
+alias tat="ta -t"
+alias tk="t kill-session"
+alias tkt="tk -t"
+alias tn="t new -s"
 
 #Git
 alias g="hub"
@@ -156,6 +167,7 @@ alias gCam="gC -a -m"
 alias gf="g fetch"
 alias gp="g pull"
 alias gP="g push"
+alias gstP="g subtree push --prefix"
 alias gpr="g pr list"
 alias gprg="gpr | grep"
 
