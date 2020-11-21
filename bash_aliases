@@ -135,6 +135,7 @@ alias ga.="ga ."
 alias gcof='gco -f'
 alias gcof.="gcof ."
 alias gd="g diff"
+alias gdt="g difftool"
 alias gr="g reset"
 alias grhard="gr --hard"
 alias grsoft="gr --soft"
