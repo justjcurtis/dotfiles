@@ -6,45 +6,47 @@ export home="$(uname -a | awk -v var="$winusr" '{ if($3 ~ /Microsoft/) print "/m
 alias .upv='cp ~/.vimrc ~/Documents/dotfiles/vimrc'
 alias .upb='cp ~/.bashrc ~/Documents/dotfiles/bashrc'
 alias .upz='cp ~/.zshrc ~/Documents/dotfiles/zshrc'
-alias .upa='cp ~/.bash_aliases ~/Documents/dotfiles/bash_aliases'
+alias .upa='cp ~/.aliases ~/Documents/dotfiles/aliases'
 alias .upt='cp ~/.tmux.conf ~/Documents/dotfiles/tmux.conf'
 alias .up='.upv;.upb;.upa;.upt;.upz'
 alias .upv.='cp ~/.vimrc ./vimrc'
 alias .upb.='cp ~/.bashrc ./bashrc'
 alias .upz.='cp ~/.zshrc ./zshrc'
-alias .upa.='cp ~/.bash_aliases ./bash_aliases'
+alias .upa.='cp ~/.aliases ./aliases'
 alias .upt.='cp ~/.tmux.conf ./tmux.conf'
 alias .up.='.upv.;.upb.;.upa.;.upt.;.upz.'
 
 alias .dv='sudo cp ~/Documents/dotfiles/vimrc ~/.vimrc'
 alias .db='sudo cp ~/Documents/dotfiles/bashrc ~/.bashrc'
 alias .dz='sudo cp ~/Documents/dotfiles/zshrc ~/.zshrc'
-alias .da='sudo cp ~/Documents/dotfiles/bash_aliases ~/.bash_aliases'
+alias .da='sudo cp ~/Documents/dotfiles/aliases ~/.aliases'
 alias .dt='sudo cp ~/Documents/dotfiles/tmux.conf ~/.tmux.conf'
 alias .d='.dv; .db; .da; .dt; .dz;sz'
 alias .dv.='sudo cp ./vimrc ~/.vimrc'
 alias .db.='sudo cp ./bashrc ~/.bashrc'
 alias .dz.='sudo cp ./zshrc ~/.zshrc'
-alias .da.='sudo cp ./bash_aliases ~/.bash_aliases'
+alias .da.='sudo cp ./aliases ~/.aliases'
 alias .dt.='sudo cp ./tmux.conf ~/.tmux.conf'
 alias .d.='.dv.; .db.; .da.; .dt.; .dz.;sb'
 
 #quickedit
 alias nl='sudo nano ~/.local_aliases'
-alias vl='sudo vim ~/.local_aliases'
-alias na='sudo nano ~/.bash_aliases'
+alias vl='sudo -E vim ~/.local_aliases'
+alias na='sudo nano ~/.aliases'
 alias nb='sudo nano ~/.bashrc'
 alias np='sudo nano ~/.bash_profile'
-alias va='sudo vim ~/.bash_aliases'
-alias vb='sudo vim ~/.bashrc'
-alias vp='sudo vim ~/.bash_profile'
-alias sa='source ~/.bash_aliases'
+alias va='sudo -E vim ~/.aliases'
+alias vt='sudo -E vim ~/.tmux.conf'
+alias vb='sudo -E vim ~/.bashrc'
+alias vz='sudo -E vim ~/.zshrc'
+alias vp='sudo -E vim ~/.bash_profile'
+alias sa='source ~/.aliases'
 alias sb='source ~/.bashrc'
 alias sz='source ~/.zshrc'
 alias nv='sudo nano ~/.vimrc'
-alias vv='sudo vim ~/.vimrc'
-alias ng='sudo vim ~/.gitignore'
-alias vg='sudo vim ~/.gitignore'
+alias vv='sudo -E vim ~/.vimrc'
+alias ng='sudo -E vim ~/.gitignore'
+alias vg='sudo -E vim ~/.gitignore'
 alias ignore='vim .gitignore'
 
 #quickchange
@@ -78,8 +80,8 @@ alias bc="bc -l"
 alias sha='shasum -a 256 '
 alias fastping='ping -c 100 -s'
 alias wget='wget -c'
-alias targz='f() { tar -zcvf $1.tar.gz $1; rm -r $1; }; f'
-alias untargz='f() { tar -zxvf $1; rm -r $1; }; f'
+alias targz='() { tar -zcvf $1.tar.gz $1; rm -r $1; };'
+alias untargz='() { tar -zxvf $1; rm -r $1; };'
 alias unlockbrew='rm -rf /usr/local/var/homebrew/locks'
 alias ct='crontab'
 alias meminfo='free -m -l -t'
@@ -92,17 +94,10 @@ alias globalgi='git config --global core.excludesfile ~/.gitignore'
 #FileSystem
 alias delhid="find . -maxdepth 1 -name '*._*' -delete"
 alias delds='find . -name '.DS_Store' -delete'
-alias mkcd='_(){ mkdir $1; cd $1; }; _'
-alias f="find"
-alias ff='f . -type f -iname'
-alias fd='f . -type d -iname'
-alias fa='f . -iname'
-alias fg='_() { f | grep $*; }; _'
-alias ffg='_() { f -type f | grep $*; }; _'
-alias fdg='_() { f -type d | grep $*; }; _'
-alias lg='_() { ls | grep $*; }; _'
-alias lag='_() { ls -a | grep $*; }; _'
-alias llg='_() { ls -l | grep $*; }; _'
+alias mkcd='(){ mkdir $1; cd $1; };'
+alias lg='() { ls | grep $*; };'
+alias lag='() { ls -a | grep $*; };'
+alias llg='() { ls -l | grep $*; };'
 
 #tmux
 alias t="tmux"
@@ -122,7 +117,7 @@ alias gi="g init"
 alias gir="g create"
 alias gI="cp '~/gitignore' '.gitignore'"
 alias gRa="g remote add"
-alias gU='f(){ g config credential.${remote}.username $1; g config credential.helper store; }; f'
+alias gU='(){ g config credential.${remote}.username $1; g config credential.helper store; };'
 alias ggunset="g config --global --unset credential.helper"
 alias grunset="g config --unset credential.helper"
 alias gguser="g config --global user.name"
@@ -188,7 +183,7 @@ alias gbag="gba | grep"
 alias gbg="gb | grep"
 alias gbd="gb -D"
 alias gbrd="gP origin --delete"
-alias gBD='_(){ gbd $1; gbrd $1; }; _'
+alias gBD='(){ gbd $1; gbrd $1; };'
 alias gbr="gb -r"
 alias gbrg="gbr | grep"
 alias gbv="gb -vv"
@@ -197,13 +192,13 @@ alias gbrm="gP origin :"
 alias gPou="gP origin -u"
 alias gco="g checkout"
 alias gD="gco development"
-alias gcob='f() { gco -b "$1" "origin/$1"; }; f'
+alias gcob='() { gco -b "$1" "origin/$1"; };'
 alias gm="g merge"
 alias gmd="gm development"
 alias gPsuo="gP --set-upstream origin"
 
 ##git stash
-alias sgrep='f() { ref=$(g --no-pager stash list | grep "$1" | cut -d: -f1 | head -n1); echo ${ref:-<no_match>}; }; f'
+alias sgrep='() { ref=$(g --no-pager stash list | grep "$1" | cut -d: -f1 | head -n1); echo ${ref:-<no_match>}; };'
 alias gS="g stash"
 alias gSl="gS list"
 alias gSp="gS pop"
@@ -212,20 +207,15 @@ alias gSc="gS clear"
 alias gSs="gS;gSa 0"
 alias gScs="gSc;gS"
 alias gSr="gSc;gSs"
-alias gSsw="f() { g stash show stash^{/$*} -p; }; f"
-alias gSap="f() { g stash apply stash^{/$*}; }; f"
+alias gSsw="() { g stash show stash^{/$*} -p; }; f"
+alias gSap="() { g stash apply stash^{/$*}; }; f"
 alias gSsv="gS save"
-alias gSd='f(){ g stash drop stash@{$1}; }; f'
-alias gSds='f() { git stash drop $(sgrep $1); }; f'
-
-##git misc
-alias k="gitk"
-
-#FUNCS
+alias gSd='(){ g stash drop stash@{$1}; };'
+alias gSds='() { git stash drop $(sgrep $1); };'
 
 #Git-Funcs
-alias gB='_(){ gco -b "$1"; gPsuo "$1"; cg; }; _'
-alias gbM='_(){ gco "$1"; gbm "$2"; gbrd "$1"; gco "$2"; gPou "$2"; }; _'
-alias gpbM='_(){ gp; gco "$1"; gbm "$2"; gbrd "$1"; gco "$2"; gPou "$2"; }; _' 
-alias gcorb='_(){ g checkout -b "$1" "origin/$1";}; _'
+alias gB='(){ gco -b "$1"; gPsuo "$1"; cg; };'
+alias gbM='(){ gco "$1"; gbm "$2"; gbrd "$1"; gco "$2"; gPou "$2"; };'
+alias gpbM='(){ gp; gco "$1"; gbm "$2"; gbrd "$1"; gco "$2"; gPou "$2"; };' 
+alias gcorb='(){ g checkout -b "$1" "origin/$1";};'
 
