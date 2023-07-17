@@ -1,5 +1,15 @@
+# chezmoi
+alias cz='chezmoi'
+alias cza='chezmoi apply'
+alias czc='chezmoi cd'
+alias czd='chezmoi diff'
+alias cze='chezmoi edit'
+alias czu='chezmoi update'
+alias czua='chezmoi update --apply'
+
 # neovim
 alias v='nvim'
+alias v.='v .'
 
 #quickedit
 alias vl='v ~/.local_aliases'
