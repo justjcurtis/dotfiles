@@ -27,10 +27,14 @@ npm install -g browser-sync
 	brew install --cask iterm2
 	# install tmux
 	brew install tmux
+	# install hub
+	brew install hub
+	# install chezmoi
+	brew install chezmoi
 {{ else if eq .chezmoi.os "linux" -}}
 	# update pacman
 	sudo pacman -Syu
-	# install neovim, tmux, hub
-	sudo pacman -S neovim tmux hub
+	# install neovim, tmux, hub, chezmoi
+	sudo pacman -S neovim tmux hub chezmoi
 {{ end -}}
 
