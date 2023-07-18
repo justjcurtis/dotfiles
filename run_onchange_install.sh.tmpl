@@ -33,11 +33,15 @@ npm install -g browser-sync
 	brew install chezmoi
 	# install karabiner
 	brew install --cask karabiner-elements
+	# install ripgrep
+	brew install ripgrep
+	# install fzf
+	brew install fzf
 {{ else if eq .chezmoi.os "linux" -}}
 	# update pacman
 	sudo pacman -Syu
-	# install neovim, tmux, hub, chezmoi
-	sudo pacman -S neovim tmux hub chezmoi
+	# install neovim, tmux, hub, chezmoi, ripgrep, fzf
+	sudo pacman -S neovim tmux hub chezmoi ripgrep fzf
 {{ end -}}
 
 # set chezmoi repo to use ssh
