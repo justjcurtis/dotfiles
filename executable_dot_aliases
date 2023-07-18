@@ -1,12 +1,13 @@
 # chezmoi
 alias cz='chezmoi'
 alias czs='chezmoi status'
-alias cza='chezmoi apply'
+alias czA='chezmoi apply'
+alias cza='chezmoi add'
 alias czc='chezmoi cd'
 alias czd='chezmoi diff'
 alias cze='chezmoi edit'
 alias czu='chezmoi update'
-alias czua='chezmoi update --apply'
+alias czuA='chezmoi update --apply'
 
 # neovim
 alias v='nvim'
