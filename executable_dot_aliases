@@ -1,5 +1,6 @@
 # chezmoi
 alias cz='chezmoi'
+alias czs='chezmoi status'
 alias cza='chezmoi apply'
 alias czc='chezmoi cd'
 alias czd='chezmoi diff'
