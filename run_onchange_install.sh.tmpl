@@ -40,11 +40,13 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 	brew install ripgrep
 	# install fzf
 	brew install fzf
+	# install xclip
+	brew install xclip
 {{ else if eq .chezmoi.os "linux" -}}
 	# update pacman
 	sudo pacman -Syu
-	# install neovim, tmux, hub, chezmoi, ripgrep, fzf
-	sudo pacman -S neovim tmux hub chezmoi ripgrep fzf
+	# install neovim, tmux, hub, chezmoi, ripgrep, fzf, xclip
+	sudo pacman -S neovim tmux hub chezmoi ripgrep fzf xclip
 {{ end -}}
 
 # set chezmoi repo to use ssh
