@@ -469,8 +469,8 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
-
+  eslint = {},
+  tsserver = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
