@@ -26,7 +26,7 @@ sudo apt-get install zsh neovim tmux hub ripgrep fzf xclip snapd git neofetch -y
 sudo snap install chezmoi --classic
 # set default shell to zsh
 sudo chsh -s $(which zsh)
-{{ if $pihole -}}
+{{ if .pihole -}}
 # install pihole
 curl -sSL https://install.pi-hole.net | bash 
 {{ end -}}
