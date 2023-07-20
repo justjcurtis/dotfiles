@@ -1,5 +1,17 @@
 #!/bin/sh
 
+# prompt
+prompt_confirm() {
+    while true; do
+        read -r -n 1 -p "${1:-Continue?} [y/n]: " REPLY
+        case $REPLY in
+            [yY]) echo ; return 0 ;;
+            [nN]) echo ; return 1 ;;
+            *) printf " \033[31m %s \n\033[0m" "invalid input"
+        esac 
+    done  
+}
+
 # os independent
 
 # install nvm
@@ -17,39 +29,43 @@ npm install -g yarn
 # install browser-sync
 npm install -g browser-sync
 
-# install tpm
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+{{ if eq .chezmoi.os "darwin" -}} # macos
+# install brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# install neovim, tmux, hub, chezmoi, ripgrep, fzf, xclip, neofetch
+brew install neovim tmux hub chezmoi ripgrep fzf xclip neofetch
+# install iterm2, karabiner-elements
+brew install --cask iterm2 karabiner-elements
 
-# macos
-{{ if eq .chezmoi.os "darwin" -}}
-	# install brew
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	# install neovim
-	brew install neovim
-	# install iterm2
-	brew install --cask iterm2
-	# install tmux
-	brew install tmux
-	# install hub
-	brew install hub
-	# install chezmoi
-	brew install chezmoi
-	# install karabiner
-	brew install --cask karabiner-elements
-	# install ripgrep
-	brew install ripgrep
-	# install fzf
-	brew install fzf
-	# install xclip
-	brew install xclip
-	# install neofetch
-	brew install neofetch
-{{ else if eq .chezmoi.os "linux" -}}
-	# update pacman
-	sudo pacman -Syu
-	# install neovim, tmux, hub, chezmoi, ripgrep, fzf, xclip, neofetch
-	sudo pacman -S neovim tmux hub chezmoi ripgrep fzf xclip neofetch
+{{ else if eq .chezmoi.os "linux" -}} # arch based
+# update pacman
+sudo pacman -Syu --noconfirm
+# install neovim, tmux, hub, chezmoi, ripgrep, fzf, xclip, neofetch
+sudo pacman -S --needed neovim tmux hub chezmoi ripgrep fzf xclip neofetch --noconfirm
+
+{{ else if eq .chezmoi.osRelease.id "raspbian" -}} # raspberry pi
+# update && upgrade
+sudo apt-get update -y && sudo apt-get upgrade -y
+# install zsh, neovim, tmux, hub, chezmoi, ripgrep, fzf, xclip, neofetch
+sudo apt-get install zsh neovim tmux hub ripgrep fzf xclip snapd git neofetch -y
+# install chezmoi
+sudo snap install chezmoi --classic
+# set default shell to zsh
+sudo chsh -s $(which zsh)
+# install pihole
+prompt_confirm "Install pihole?" && curl -sSL https://install.pi-hole.net | bash || echo "skipping pihole install"
 {{ end -}}
+
+if [[ -z ${ZSH} ]]; then
+    # install oh-my-zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+    # install powerlevel10k
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+    # install tpm
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
 
 # set chezmoi repo to use ssh
 cd ~/.local/share/chezmoi
