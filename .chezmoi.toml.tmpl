@@ -3,7 +3,7 @@
 {{- $author := promptStringOnce . "author" "Author" -}}
 
 {{ if eq .chezmoi.osRelease.id "raspbian" -}} # raspberry pi
-{{ $pihole := promptBool . "pihole" "Install pihole on this machine ?" }}
+{{ $pihole := promptBoolOnce . "pihole" "Install pihole on this machine ?" }}
 {{ end -}}
 
 [data]
