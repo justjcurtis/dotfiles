@@ -29,7 +29,19 @@ npm install -g yarn
 # install browser-sync
 npm install -g browser-sync
 
-{{ if eq .chezmoi.os "darwin" -}} # macos
+{{ if eq .chezmoi.osRelease.id "raspbian" -}} # raspberry pi
+# update && upgrade
+sudo apt-get update -y && sudo apt-get upgrade -y
+# install zsh, neovim, tmux, hub, chezmoi, ripgrep, fzf, xclip, neofetch
+sudo apt-get install zsh neovim tmux hub ripgrep fzf xclip snapd git neofetch -y
+# install chezmoi
+sudo snap install chezmoi --classic
+# set default shell to zsh
+sudo chsh -s $(which zsh)
+# install pihole
+prompt_confirm "Install pihole?" && curl -sSL https://install.pi-hole.net | bash || echo "skipping pihole install"
+
+{{ else if eq .chezmoi.os "darwin" -}} # macos
 # install brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 # install neovim, tmux, hub, chezmoi, ripgrep, fzf, xclip, neofetch
@@ -42,18 +54,6 @@ brew install --cask iterm2 karabiner-elements
 sudo pacman -Syu --noconfirm
 # install neovim, tmux, hub, chezmoi, ripgrep, fzf, xclip, neofetch
 sudo pacman -S --needed neovim tmux hub chezmoi ripgrep fzf xclip neofetch --noconfirm
-
-{{ else if eq .chezmoi.osRelease.id "raspbian" -}} # raspberry pi
-# update && upgrade
-sudo apt-get update -y && sudo apt-get upgrade -y
-# install zsh, neovim, tmux, hub, chezmoi, ripgrep, fzf, xclip, neofetch
-sudo apt-get install zsh neovim tmux hub ripgrep fzf xclip snapd git neofetch -y
-# install chezmoi
-sudo snap install chezmoi --classic
-# set default shell to zsh
-sudo chsh -s $(which zsh)
-# install pihole
-prompt_confirm "Install pihole?" && curl -sSL https://install.pi-hole.net | bash || echo "skipping pihole install"
 {{ end -}}
 
 if [[ -z ${ZSH} ]]; then
