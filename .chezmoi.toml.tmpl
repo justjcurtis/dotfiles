@@ -2,16 +2,10 @@
 {{- $username := promptStringOnce . "username" "Username" -}}
 {{- $author := promptStringOnce . "author" "Author" -}}
 
-{{-  $pihole := false -}}
-{{-  if eq .chezmoi.osRelease.id "raspbian" -}} 
-{{-  $pihole := promptBoolOnce . "pihole" "Install pihole on this machine ?" -}}
-{{-  end -}}
-
 [data]
     email = {{ $email | quote }}
     username = {{ $username | quote }}
     author = {{ $author | quote }}
-    pihole = {{ $pihole }}
 
 [diff]
     exclude = ["scripts"]
