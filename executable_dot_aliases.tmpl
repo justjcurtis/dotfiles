@@ -9,10 +9,10 @@ alias cze='chezmoi edit'
 alias czu='chezmoi update'
 alias czuA='chezmoi update --apply'
 
-{{- if eq .chezmoi.osRelease.id "raspbian" -}}
+{{ if eq .chezmoi.osRelease.id "raspbian" -}}
 alias installPihole = 'curl -sSL https://install.pi-hole.net | bash'
 
-{{- end -}}
+{{ end }}
 # neovim
 alias v='nvim'
 alias v.='v .'
