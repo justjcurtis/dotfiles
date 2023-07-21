@@ -9,9 +9,11 @@ alias cze='chezmoi edit'
 alias czu='chezmoi update'
 alias czuA='chezmoi update --apply'
 
+{{ if .chezmoi.osRelease -}}
 {{ if eq .chezmoi.osRelease.id "raspbian" -}}
 alias installPihole='curl -sSL https://install.pi-hole.net | bash'
 
+{{ end }}
 {{ end }}
 # neovim
 alias v='nvim'
@@ -116,6 +118,7 @@ alias gignored='g !git ls-files -v | grep "^[[:lower:]]"'
 alias gC="g commit"
 alias gCm="gC -m"
 alias gCam="gC -a -m"
+alias gbump="gCm 'bump' --allow-empty; gP"
 
 ##git remote
 alias gf="g fetch"

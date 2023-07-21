@@ -141,7 +141,9 @@ export NVM_DIR="$HOME/.nvm"
 # open tmux at every terminal start & close on exit
 # [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
 c; neofetch
+{{ if .chezmoi.osRelease -}}
 {{ if eq .chezmoi.osRelease.id "raspbian" -}}
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/snap/bin"
+{{- end }}
 {{- end }}
