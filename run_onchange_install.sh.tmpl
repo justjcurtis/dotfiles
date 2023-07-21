@@ -17,10 +17,12 @@ brew install --cask iterm2 karabiner-elements
 {{ else if eq .chezmoi.osRelease.id "raspbian" -}} # raspberry pi
 # update && upgrade
 sudo apt-get update -y && sudo apt-get upgrade -y
-# install zsh, neovim, tmux, hub, chezmoi, ripgrep, fzf, xclip, neofetch
-sudo apt-get install zsh neovim tmux hub ripgrep fzf xclip snapd git neofetch -y
+# install zsh, neovim, tmux, hub, chezmoi, ripgrep, fzf, xclip
+sudo apt-get install zsh tmux hub ripgrep fzf xclip snapd git neofetch -y
 # install chezmoi
 sudo snap install chezmoi --classic
+# install neovim
+sudo snap install nvim --classic
 # set default shell to zsh
 sudo chsh -s $(which zsh)
 
