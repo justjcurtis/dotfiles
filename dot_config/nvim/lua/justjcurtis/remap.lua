@@ -30,3 +30,5 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>f", "<cmd>Format<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>,", ":let @+ = expand ('%:p')<CR>", { silent = true })
+vim.keymap.set("n", "<leader>rr", ":Neotree reveal<CR>", { silent = true })
+vim.keymap.set("n", "<leader>-", ":bp<CR>", { silent = true })
