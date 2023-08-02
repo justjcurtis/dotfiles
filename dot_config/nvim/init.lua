@@ -29,6 +29,9 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
+  -- colorizer
+  'norcalli/nvim-colorizer.lua',
+
   -- Undotree
   'mbbill/undotree',
 
