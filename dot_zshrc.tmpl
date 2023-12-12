@@ -111,6 +111,9 @@ source $ZSH/oh-my-zsh.sh
 # set git difftool to vimdiff
 git config --global diff.tool vimdiff
 
+export PATH="$PATH:$HOME/.local/scripts"
+# binds
+bindkey -s ^f "tmux-sessionizer\n"
 
 # some more ls aliases
 alias ll='ls -alF'
