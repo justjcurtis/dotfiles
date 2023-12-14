@@ -8,7 +8,6 @@ vim.g.maplocalleader = ' '
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-print(vim.loop.fs_stat(lazypath))
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
     'git',
@@ -204,7 +203,7 @@ require('lazy').setup({
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
-    }
+    },
   },
 
   -- markdown previewer
@@ -562,6 +561,5 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
-
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

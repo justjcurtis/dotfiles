@@ -5,6 +5,7 @@ require("neo-tree").setup({
     statusline = true
   },
   window = {
+    width = 25,
     mappings = {
       ["<bs>"] = "navigate_up",
       ["."] = "set_root",
