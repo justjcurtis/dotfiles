@@ -17,7 +17,7 @@ I'm using [`chezmoi`](https://www.chezmoi.io/) to handle my dotfile config to ma
 
 - A bunch of aliases I have build up over the past 5 years (use @ your own risk)
 - Sweet neovim config using lazy.nvim & kickstart.nvim.
-- Hamronious tmux setup using tpm
+- Harmonious tmux setup using tpm
 - fzf + ripgrep integration for neovim & general terminal use
 - Scripts with binds for fzf-ing project dirs and help from cht.sh 
 - A general sense of wellbeing
