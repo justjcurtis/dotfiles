@@ -1,6 +1,6 @@
 ### m'Dotfiles
 
-I'm using [`chezmoi`](https://www.chezmoi.io/) to handle my dotfile config to make using the *same* dotfiles across linux and mac.
+I'm using [`chezmoi`](https://www.chezmoi.io/) to handle my dotfile config to make using the *same* dotfiles across linux (arch based is assumed for install) and mac.
 
 #### Installation
 
