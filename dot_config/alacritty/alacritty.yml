@@ -13,7 +13,7 @@
   #TERM: xterm-256color
 
 window:
-  opacity: 0.9
+  opacity: 0.8
   # Window dimensions (changes require restart)
   #
   # Specified in number of columns/lines, not pixels.
@@ -248,15 +248,6 @@ cursor:
 
 # Live config reload (changes require restart)
 live_config_reload: true
-
-# Shell
-#
-# You can set `shell.program` to the path of your favorite shell, e.g. `/bin/fish`.
-# Entries in `shell.args` are passed unmodified as arguments to the shell.
-shell:
-  program: C:\\Windows\\System32\\wsl.exe
-  #args:
-  #  - --login
 
 # Key bindings
 #
