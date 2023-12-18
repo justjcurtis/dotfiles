@@ -237,3 +237,6 @@ bindsym $mod+d exec rofi -show drun -config ~/.config/rofi/config.rasi
 
 # i3lock config
 bindsym $mod+Shift+x exec --no-startup-id i3lock -i ~/Pictures/SavedWallpapers/lockscreen.png -t -e -f -n
+
+# polybar
+exec --no-startup-id polybar
