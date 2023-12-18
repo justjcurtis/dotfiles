@@ -216,9 +216,6 @@ bar {
         }
 }
 
-# lock screen
-bindsym $mod+sHift+x exec i3lock
-
 # gaps
 gaps inner 4
 gaps outer 2
@@ -234,3 +231,6 @@ exec_always --no-startup-id "picom --config ~/.config/picom/picom.conf"
 
 # rofi
 bindsym $mod+d exec rofi -show drun -config ~/.config/rofi/config.rasi
+
+# i3lock config
+bindsym $mod+Shift+x exec --no-startup-id i3lock -i ~/Pictures/SavedWallpapers/lockscreen.png -t -e -f -n
