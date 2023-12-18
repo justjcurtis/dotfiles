@@ -209,17 +209,17 @@ hide_edge_borders both
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status
-        colors {
-                background $bg-colour
-                separator  $separator-colour
-                #                  border          backgr.         text
-                focused_workspace  $bg-colour      $bg-colour      $text-colour
-                inactive_workspace $bg-colour      $bg-colour      $inactive-text-colour
-                urgent_workspace   $urgent-colour  $urgent-colour  $text-colour
-        }
-}
+# bar {
+#         status_command i3status
+#         colors {
+#                 background $bg-colour
+#                 separator  $separator-colour
+#                 #                  border          backgr.         text
+#                 focused_workspace  $bg-colour      $bg-colour      $text-colour
+#                 inactive_workspace $bg-colour      $bg-colour      $inactive-text-colour
+#                 urgent_workspace   $urgent-colour  $urgent-colour  $text-colour
+#         }
+# }
 
 # gaps
 gaps inner 4
