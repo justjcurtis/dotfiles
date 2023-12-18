@@ -53,6 +53,8 @@ tiling_drag modifier titlebar
 
 # start a terminal
 bindsym $mod+Return exec alacritty
+# start brave
+bindsym $mod+shift+Return exec brave
 
 # kill focused window
 bindsym $mod+Shift+q kill
