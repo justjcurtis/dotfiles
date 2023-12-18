@@ -59,6 +59,8 @@ bindsym $mod+shift+Return exec brave
 bindsym $mod+e exec dolphin
 # start discord
 bindsym $mod+shift+d exec discord
+# start btop
+bindsym $mod+z exec alacritty -e btop
 
 # kill focused window
 bindsym $mod+q kill
