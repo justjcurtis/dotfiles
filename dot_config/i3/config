@@ -53,6 +53,8 @@ tiling_drag modifier titlebar
 
 # start a terminal
 bindsym $mod+Return exec alacritty
+# start mpv
+bindsym $mod+shift+m exec mpv --player-operation-mode=pseudo-gui
 # start brave
 bindsym $mod+b exec brave
 bindsym $mod+shift+b exec brave --incognito
@@ -243,10 +245,11 @@ exec_always --no-startup-id "picom --config ~/.config/picom/picom.conf"
 
 # rofi
 bindsym $mod+d exec rofi -show drun -config ~/.config/rofi/config.rasi
+# rofi expressvpn
+bindsym $mod+shift+v exec rofi-expressvpn
 
 # i3lock config
 bindsym $mod+Shift+x exec --no-startup-id i3lock -i ~/Pictures/SavedWallpapers/lockscreen.png -f
-exec --no-startup-id xautolock -time 10 -locker "i3lock -i ~/Pictures/SavedWallpapers/lockscreen.png -f"
 
 # polybar
 exec --no-startup-id ~/.config/polybar/launch.sh --forest
