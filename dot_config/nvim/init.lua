@@ -239,7 +239,7 @@ require('lazy').setup({
     },
   },
 
-  -- snax
+  -- snacks
   {
     "folke/snacks.nvim",
     priority = 1000,
@@ -247,7 +247,7 @@ require('lazy').setup({
     ---@type snacks.Config
     opts = {
       bigfile = { enabled = true },
-      dashboard = { enabled = true },
+      dashboard = require('justjcurtis.dashboard'),
       explorer = { enabled = true },
       indent = { enabled = true },
       input = { enabled = true },
@@ -255,7 +255,14 @@ require('lazy').setup({
         enabled = true,
         timeout = 3000,
       },
-      picker = { enabled = true },
+      picker = {
+        sources = {
+          explorer = {
+            focus = "input",
+            auto_close = true,
+          },
+        },
+      },
       quickfile = { enabled = true },
       scope = { enabled = true },
       scroll = { enabled = true },
@@ -275,6 +282,8 @@ require('lazy').setup({
       { "<leader>:",       function() Snacks.picker.command_history() end,                         desc = "Command History" },
       { "<leader>n",       function() Snacks.picker.notifications() end,                           desc = "Notification History" },
       { "<c-b>",           function() Snacks.explorer() end,                                       desc = "File Explorer" },
+      { "<leader>rr",      function() Snacks.explorer.reveal() end,                                desc = "Reveal Current File" },
+      { "<leader>d",       function() Snacks.dashboard() end,                                      desc = "Dashboard" },
       -- find
       { "<leader>fb",      function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
       { "<leader>fc",      function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
