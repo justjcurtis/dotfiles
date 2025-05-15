@@ -98,18 +98,23 @@ require('lazy').setup({
     "yetone/avante.nvim",
     event = "VeryLazy",
     lazy = false,
-    version = false,       -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+    version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
-      provider = "claude", -- Recommend using Claude
-      -- WARNING: Since auto-suggestions are a high-frequency operation and therefore expensive,
-      -- currently designating it as `copilot` provider is dangerous because: https://github.com/yetone/avante.nvim/issues/1048
-      -- Of course, you can reduce the request frequency by increasing `suggestion.debounce`.
-      auto_suggestions_provider = "claude",
-      claude = {
-        endpoint = "https://api.anthropic.com",
-        model = "claude-3-5-sonnet-20241022",
-        temperature = 0,
-        max_tokens = 4096,
+      auto_suggestions_provider = "claude37",
+      provider = "claude37",
+      vendors = {
+        claude37 = {
+          __inherited_from = "claude",
+          api_key_name = "ANTHROPIC_API_KEY",
+          endpoint = "https://api.anthropic.com",
+          model = "claude-3-7-sonnet-latest",
+          temperature = 0,
+          max_tokens = 8192,
+        },
+      },
+
+      gemini = {
+        model = "gemini-2.5-pro-exp-03-25",
       },
       behaviour = {
         auto_suggestions = false, -- Experimental stage
@@ -119,6 +124,7 @@ require('lazy').setup({
         support_paste_from_clipboard = false,
         minimize_diff = true,         -- Whether to remove unchanged lines when applying a code block
         enable_token_counting = true, -- Whether to enable token counting. Default to true.
+        enable_claude_text_editor_tool_mode = true,
       },
       mappings = {
         diff = {
@@ -253,12 +259,11 @@ require('lazy').setup({
       input = { enabled = true },
       notifier = {
         enabled = true,
-        timeout = 3000,
+        timeout = 2000,
       },
       picker = {
         sources = {
           explorer = {
-            focus = "input",
             auto_close = true,
           },
         },
@@ -632,6 +637,9 @@ require('nvim-treesitter.configs').setup {
     },
   },
 }
+
+-- disable zig autoformat
+vim.g.zig_fmt_autosave = 0
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })

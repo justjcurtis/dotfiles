@@ -8,7 +8,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 vim.keymap.set("n", "<leader>Q", ":q!<CR>")
 vim.keymap.set("n", "<leader>w", ":w<CR>:Format<CR>:w<CR>")
-vim.keymap.set("n", "<leader>W", ":w!<CR>:Format<CR>:w!<CR>")
+vim.keymap.set("n", "<leader>W", ":w!<CR>:w!<CR>")
 
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
