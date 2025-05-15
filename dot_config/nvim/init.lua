@@ -3,6 +3,9 @@
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.api.nvim_create_user_command("Format", function()
+  vim.lsp.buf.format()
+end, {})
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -100,14 +103,14 @@ require('lazy').setup({
     lazy = false,
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
-      auto_suggestions_provider = "claude37",
-      provider = "claude37",
+      auto_suggestions_provider = "claude35",
+      provider = "claude35",
       vendors = {
-        claude37 = {
+        claude35 = {
           __inherited_from = "claude",
           api_key_name = "ANTHROPIC_API_KEY",
           endpoint = "https://api.anthropic.com",
-          model = "claude-3-7-sonnet-latest",
+          model = "claude-3-5-sonnet-latest",
           temperature = 0,
           max_tokens = 8192,
         },
@@ -719,21 +722,29 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
-}
-
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
+require('mason').setup({
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗"
     }
-  end,
+  }
+})
+
+local mason_lspconfig = require('mason-lspconfig')
+
+-- Ensure servers are installed
+local mason_servers = {
+  "lua_ls",
+  "rust_analyzer",
+  "templ"
 }
+
+mason_lspconfig.setup({
+  ensure_installed = mason_servers,
+  automatic_installation = true,
+})
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
