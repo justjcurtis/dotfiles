@@ -103,8 +103,8 @@ require('lazy').setup({
     lazy = false,
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
-      auto_suggestions_provider = "claude35",
-      provider = "claude35",
+      auto_suggestions_provider = "gemini",
+      provider = "gemini",
       vendors = {
         claude35 = {
           __inherited_from = "claude",
@@ -115,9 +115,8 @@ require('lazy').setup({
           max_tokens = 8192,
         },
       },
-
       gemini = {
-        model = "gemini-2.5-pro-exp-03-25",
+        model = "gemini-2.5-flash-preview-04-17",
       },
       behaviour = {
         auto_suggestions = false, -- Experimental stage
@@ -797,5 +796,13 @@ cmp.setup {
   },
 }
 vim.filetype.add({ extension = { templ = "templ" } })
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    local root = vim.fn.finddir(".git", ".;")
+    if root ~= "" then
+      vim.cmd("cd " .. vim.fn.fnamemodify(root, ":h"))
+    end
+  end
+})
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
