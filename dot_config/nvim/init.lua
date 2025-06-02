@@ -119,20 +119,44 @@ require('lazy').setup({
     lazy = false,
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
-      auto_suggestions_provider = "gemini",
-      provider = "gemini",
+      auto_suggestions_provider = "devstral",
+      provider = "devstral",
       vendors = {
+        claude4 = {
+          __inherited_from = "claude",
+          api_key_name = "ANTHROPIC_API_KEY",
+          endpoint = "https://api.anthropic.com",
+          model = "claude-sonnet-4-20250514",
+          temperature = 0,
+        },
         claude35 = {
           __inherited_from = "claude",
           api_key_name = "ANTHROPIC_API_KEY",
           endpoint = "https://api.anthropic.com",
           model = "claude-3-5-sonnet-latest",
           temperature = 0,
-          max_tokens = 8192,
         },
-      },
-      gemini = {
-        model = "gemini-2.5-flash-preview-04-17",
+        deepseekv3 = {
+          __inherited_from = "openai",
+          api_key_name = "OPENROUTER_API_KEY",
+          endpoint = "https://openrouter.ai/api/v1",
+          model = "deepseek/deepseek-chat-v3-0324:free",
+          disable_tools = true,
+          temperature = 0,
+        },
+        geminiflash25 = {
+          __inherited_from = "openai",
+          api_key_name = "OPENROUTER_API_KEY",
+          endpoint = "https://openrouter.ai/api/v1",
+          model = "google/gemini-2.5-flash-preview-05-20",
+          temperature = 0,
+        },
+        devstral = {
+          __inherited_from = "openai",
+          api_key_name = "OPENROUTER_API_KEY",
+          endpoint = "https://openrouter.ai/api/v1",
+          model = "mistralai/devstral-small",
+        }
       },
       behaviour = {
         auto_suggestions = false, -- Experimental stage
