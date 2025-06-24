@@ -119,22 +119,27 @@ require('lazy').setup({
     lazy = false,
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
-      auto_suggestions_provider = "devstral",
-      provider = "devstral",
-      vendors = {
+      auto_suggestions_provider = "geminiflash25",
+      provider = "geminiflash25",
+      cursor_applying_provider = "deepseekv3",
+      providers = {
         claude4 = {
           __inherited_from = "claude",
           api_key_name = "ANTHROPIC_API_KEY",
           endpoint = "https://api.anthropic.com",
           model = "claude-sonnet-4-20250514",
-          temperature = 0,
+          extra_request_body = {
+            temperature = 0,
+          },
         },
         claude35 = {
           __inherited_from = "claude",
           api_key_name = "ANTHROPIC_API_KEY",
           endpoint = "https://api.anthropic.com",
           model = "claude-3-5-sonnet-latest",
-          temperature = 0,
+          extra_request_body = {
+            temperature = 0,
+          },
         },
         deepseekv3 = {
           __inherited_from = "openai",
@@ -142,21 +147,19 @@ require('lazy').setup({
           endpoint = "https://openrouter.ai/api/v1",
           model = "deepseek/deepseek-chat-v3-0324:free",
           disable_tools = true,
-          temperature = 0,
+          extra_request_body = {
+            temperature = 0,
+          },
         },
         geminiflash25 = {
           __inherited_from = "openai",
           api_key_name = "OPENROUTER_API_KEY",
           endpoint = "https://openrouter.ai/api/v1",
           model = "google/gemini-2.5-flash-preview-05-20",
-          temperature = 0,
+          extra_request_body = {
+            temperature = 0,
+          },
         },
-        devstral = {
-          __inherited_from = "openai",
-          api_key_name = "OPENROUTER_API_KEY",
-          endpoint = "https://openrouter.ai/api/v1",
-          model = "mistralai/devstral-small",
-        }
       },
       behaviour = {
         auto_suggestions = false, -- Experimental stage
@@ -164,9 +167,10 @@ require('lazy').setup({
         auto_set_keymaps = true,
         auto_apply_diff_after_generation = false,
         support_paste_from_clipboard = false,
-        minimize_diff = true,         -- Whether to remove unchanged lines when applying a code block
-        enable_token_counting = true, -- Whether to enable token counting. Default to true.
+        minimize_diff = true,               -- Whether to remove unchanged lines when applying a code block
+        enable_token_counting = true,       -- Whether to enable token counting. Default to true.
         enable_claude_text_editor_tool_mode = true,
+        enable_cursor_planning_mode = true, -- Whether to enable cursor planning mode
       },
       mappings = {
         diff = {
@@ -759,15 +763,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
--- [[ Configure LSP ]]
---  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
-  -- NOTE: Remember that lua is a real programming language, and as such it is possible
-  -- to define small helper and utility functions so you don't have to repeat yourself
-  -- many times.
-  --
-  -- In this case, we create a function that lets us more easily define mappings specific
-  -- for LSP related items. It sets the mode, buffer and description for us each time.
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -777,7 +773,7 @@ local on_attach = function(_, bufnr)
   end
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>cx', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -786,11 +782,9 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
-  -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-K>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
-  -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
   nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
@@ -798,21 +792,12 @@ local on_attach = function(_, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
 
-  -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 end
 
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
   templ = {},
   rust_analyzer = {},
   lua_ls = {
@@ -854,6 +839,13 @@ mason_lspconfig.setup({
   ensure_installed = mason_servers,
   automatic_installation = true,
 })
+
+-- Setup each server
+for server_name, server_opts in pairs(servers) do
+  server_opts.on_attach = on_attach
+  server_opts.capabilities = capabilities
+  require('lspconfig')[server_name].setup(server_opts)
+end
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
