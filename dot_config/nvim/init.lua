@@ -121,7 +121,7 @@ require('lazy').setup({
     opts = {
       auto_suggestions_provider = "geminiflash25",
       provider = "geminiflash25",
-      cursor_applying_provider = "deepseekv3",
+      cursor_applying_provider = "geminiflash25",
       providers = {
         claude4 = {
           __inherited_from = "claude",
@@ -156,6 +156,15 @@ require('lazy').setup({
           api_key_name = "OPENROUTER_API_KEY",
           endpoint = "https://openrouter.ai/api/v1",
           model = "google/gemini-2.5-flash-preview-05-20",
+          extra_request_body = {
+            temperature = 0,
+          },
+        },
+        grok3mini = {
+          __inherited_from = "openai",
+          api_key_name = "OPENROUTER_API_KEY",
+          endpoint = "https://openrouter.ai/api/v1",
+          model = "x-ai/grok-3-mini",
           extra_request_body = {
             temperature = 0,
           },
@@ -287,6 +296,29 @@ require('lazy').setup({
           file_types = { "markdown", "Avante" },
         },
         ft = { "markdown", "Avante" },
+      },
+    },
+  },
+
+
+  -- obsidian
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*", -- recommended, use latest release instead of latest commit
+    lazy = true,
+    event = {
+      "BufReadPre ~/Documents/pit/*.md",
+      "BufNewFile ~/Documents/pit/*.md",
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "pit",
+          path = "~/Documents/pit",
+        },
       },
     },
   },
@@ -692,7 +724,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'html', 'templ', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'html', 'templ', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'markdown', 'markdown_inline' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = true,
@@ -906,5 +938,9 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end
   end
 })
+
+-- Set conceallevel to 2 for obsidian.nvim
+vim.o.conceallevel = 2
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
