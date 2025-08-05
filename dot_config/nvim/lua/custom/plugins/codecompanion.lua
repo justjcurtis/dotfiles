@@ -65,3 +65,5 @@ require("codecompanion").setup({
     }
   },
 })
+
+return {}

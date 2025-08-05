@@ -470,6 +470,9 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ':TSUpdate',
+    config = function()
+      require('frags.treesitter')
+    end
   },
 
 
@@ -520,6 +523,7 @@ require('lazy').setup({
   require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
-  { import = 'custom' },
+  { import = 'custom.plugins' },
+  { import = 'custom.justjcurtis' },
 }, {})
 require('after')

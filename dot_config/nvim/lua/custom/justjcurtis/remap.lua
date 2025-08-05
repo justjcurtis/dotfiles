@@ -39,3 +39,5 @@ vim.keymap.set("n", "<leader>-", ":bp<CR>", { silent = true })
 vim.keymap.set("n", "<leader>cca", ":CodeCompanionActions<CR>", { silent = true })
 vim.keymap.set("n", "<leader>ccc", ":CodeCompanionChat Toggle<CR>", { silent = true })
 vim.keymap.set("n", "<leader>ccd", ":CodeCompanionChat Add<CR>", { silent = true })
+
+return {}
