@@ -116,7 +116,7 @@ require('lazy').setup({
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
-    lazy = false,
+    lazy = true,
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     opts = {
       auto_suggestions_provider = "geminiflash25",
@@ -505,9 +505,14 @@ require('lazy').setup({
   -- markdown previewer
   {
     "iamcco/markdown-preview.nvim",
-    lazy = false,
-    config = function()
+    ft = "markdown", -- load only for markdown files
+    lazy = true,
+    build = function()
       vim.fn["mkdp#util#install"]()
+    end,
+    init = function()
+      vim.g.mkdp_auto_start = 0
+      vim.g.mkdp_auto_close = 1
     end,
   },
 
