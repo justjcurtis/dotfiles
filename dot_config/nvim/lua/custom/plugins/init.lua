@@ -1,5 +1,9 @@
--- You can add your own plugins here or in other files in this directory!
---  I promise not to create any merge conflicts in this directory :)
---
--- See the kickstart.nvim README for more information
+require('custom.plugins.autopairs-config')
+require('custom.plugins.codecompanion')
+require('custom.plugins.copilot')
+require('custom.plugins.harpoon')
+require('custom.plugins.tmuxNavigator')
+require('custom.plugins.transparent')
+require('custom.plugins.undotree')
+require('custom.plugins.telescope')
 return {}
