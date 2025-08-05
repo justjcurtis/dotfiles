@@ -330,7 +330,7 @@ require('lazy').setup({
     ---@type snacks.Config
     opts = {
       bigfile = { enabled = true },
-      dashboard = require('lua.custom.frags.dashboard'),
+      dashboard = require('frags.dashboard'),
       explorer = { enabled = true },
       indent = { enabled = true },
       input = { enabled = true },
@@ -356,7 +356,7 @@ require('lazy').setup({
         }
       }
     },
-    keys = require('lua.custom.frags.snackkeys'),
+    keys = require('frags.snackkeys'),
     init = function()
       vim.api.nvim_create_autocmd("User", {
         pattern = "VeryLazy",
