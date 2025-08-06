@@ -36,4 +36,18 @@ vim.keymap.set("n", "<leader>cca", ":CodeCompanionActions<CR>", { silent = true 
 vim.keymap.set("n", "<leader>ccc", ":CodeCompanionChat Toggle<CR>", { silent = true })
 vim.keymap.set("n", "<leader>ccd", ":CodeCompanionChat Add<CR>", { silent = true })
 
+vim.api.nvim_set_keymap('n', '<leader>[', [[:lua ToggleCheckbox()<CR>]], { noremap = true, silent = true })
+
+function ToggleCheckbox()
+    local line = vim.api.nvim_get_current_line()
+    if line:match('%- %[%s%]') then
+        -- change [ ] to [x]
+        line = line:gsub('%- %[%s%]', '- [x]')
+    elseif line:match('%- %[x%]') then
+        -- change [x] to [ ]
+        line = line:gsub('%- %[x%]', '- [ ]')
+    end
+    vim.api.nvim_set_current_line(line)
+end
+
 return {}
