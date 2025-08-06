@@ -30,12 +30,8 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>f", ":Format<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>,", ":let @+ = expand ('%:p')<CR>", { silent = true })
--- vim.keymap.set("n", "<leader>rr", ":Neotree reveal<CR>", { silent = true })
 vim.keymap.set("n", "<leader>-", ":bp<CR>", { silent = true })
 
--- leader c c a should run :CodeCompanionActions
--- leader c c c should run :CodeCompanionChat Toggle
--- leader c c d should run :CodeCompanionChat Add
 vim.keymap.set("n", "<leader>cca", ":CodeCompanionActions<CR>", { silent = true })
 vim.keymap.set("n", "<leader>ccc", ":CodeCompanionChat Toggle<CR>", { silent = true })
 vim.keymap.set("n", "<leader>ccd", ":CodeCompanionChat Add<CR>", { silent = true })

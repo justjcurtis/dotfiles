@@ -47,7 +47,6 @@ require('lazy').setup({
   'github/copilot.vim',
 
   -- Git related plugins
-  'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
@@ -81,6 +80,8 @@ require('lazy').setup({
   },
 
   {
+    event = "VeryLazy",
+    lazy = true,
     -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = {
@@ -94,16 +95,9 @@ require('lazy').setup({
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
     },
-  },
-
-  -- codecompanion - avante alternative
-  {
-    "olimorris/codecompanion.nvim",
-    opts = {},
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
+    config = function()
+      require('frags.lsp_config')
+    end
   },
 
   -- markdown renderer for codecompanion
@@ -390,7 +384,7 @@ require('lazy').setup({
 
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',          opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -445,10 +439,19 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',         opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
-  { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
+  {
+    event = "VeryLazy",
+    lazy = true,
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('frags.telescope')
+    end
+  },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
@@ -523,7 +526,7 @@ require('lazy').setup({
   require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
-  { import = 'custom.plugins' },
-  { import = 'custom.justjcurtis' },
+  { import = "custom.plugins",     event = "VeryLazy" },
+  { import = "custom.justjcurtis", event = "VeryLazy" },
+
 }, {})
-require('after')
