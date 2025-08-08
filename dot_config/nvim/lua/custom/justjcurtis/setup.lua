@@ -70,14 +70,14 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 vim.filetype.add({ extension = { templ = "templ" } })
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    local root = vim.fn.finddir(".git", ".;")
-    if root ~= "" then
-      vim.cmd("cd " .. vim.fn.fnamemodify(root, ":h"))
-    end
-  end
-})
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   callback = function()
+--     local root = vim.fn.finddir(".git", ".;")
+--     if root ~= "" then
+--       vim.cmd("cd " .. vim.fn.fnamemodify(root, ":h"))
+--     end
+--   end
+-- })
 
 -- Set conceallevel to 2 for obsidian.nvim
 vim.o.conceallevel = 2
