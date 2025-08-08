@@ -2,7 +2,6 @@ return {
     width = 87,
     row = nil,                                                                   -- dashboard position. nil for center
     col = nil,                                                                   -- dashboard position. nil for center
-    pane_gap = 4,                                                                -- empty columns between vertical panes
     autokeys = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", -- autokey sequence
     -- These settings are used by some built-in sections
     preset = {
@@ -60,14 +59,13 @@ return {
     sections = {
         {
             { section = "header" },
-            { section = "keys",   gap = 1, padding = 1 },
-            { section = "startup" },
+            { section = "keys",    gap = 1,    padding = 1 },
+            { section = "startup", padding = 2 },
             {
                 section = "terminal",
-                cmd =
-                "chafa ~/.config/nvim/img.png --format symbols --symbols vhalf --size 87x25 --stretch --probe off; sleep .1",
-                height = 25,
-                padding = 1,
+                cmd = "jea; sleep 0.1",
+                height = 22,
+                indent = 25,
             }
         },
 
