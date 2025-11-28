@@ -1,75 +1,65 @@
 #!/bin/sh
 
-if [ -z ${ZSH} ]; then
-    # install oh-my-zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    mv ~/.zshrc.pre-oh-my-zsh ~/.zshrc
-fi
-
 # -------------------------
-# macOS
+# OS detection and package installation
 # -------------------------
 {{ if eq .chezmoi.os "darwin" -}}
-# install brew
+# macOS: install brew and packages
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-# install packages
 brew install neovim tmux hub chezmoi ripgrep fzf xclip neofetch
 brew install --cask iterm2 karabiner-elements
 
-# -------------------------
-# Raspberry Pi / Raspbian
-# -------------------------
 {{ else if eq .chezmoi.osRelease.id "raspbian" -}}
+# Raspbian: update and install packages
 sudo apt-get update -y && sudo apt-get upgrade -y
 sudo apt-get install zsh tmux hub ripgrep fzf xclip snapd git neofetch -y
 sudo snap install chezmoi --classic
 sudo snap install nvim --classic
 sudo chsh -s $(which zsh)
 
-# -------------------------
-# Linux (Arch-based)
-# -------------------------
 {{ else if eq .chezmoi.os "linux" -}}
-# Detect Arch via pacman
+# Linux: detect package manager
 if command -v pacman >/dev/null 2>&1; then
+    # Arch-based
     sudo pacman -Syu --noconfirm
-    sudo pacman -S --needed neovim tmux hub chezmoi ripgrep fzf xclip neofetch --noconfirm
-
-# -------------------------
-# Linux (Debian/Ubuntu-based)
-# -------------------------
+    sudo pacman -S --needed zsh neovim tmux hub chezmoi ripgrep fzf xclip neofetch --noconfirm
 elif command -v apt-get >/dev/null 2>&1; then
+    # Debian/Ubuntu-based
     sudo apt-get update -y && sudo apt-get upgrade -y
     sudo apt-get install -y zsh neovim tmux hub chezmoi ripgrep fzf xclip git neofetch curl
-    # set default shell to zsh
     sudo chsh -s $(which zsh)
 fi
 {{ end -}}
 
 # -------------------------
-# OS independent installs
+# Install oh-my-zsh and related tools after zsh is present
 # -------------------------
-
-# install nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# install node + global packages
-nvm install --lts
-npm install -g yarn
-npm install -g browser-sync
-
 if [ -z ${ZSH} ]; then
-    # install powerlevel10k
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    mv ~/.zshrc.pre-oh-my-zsh ~/.zshrc
+
+    # install powerlevel10k theme
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
     # install tmux plugin manager
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-# set chezmoi repo to use ssh
+# -------------------------
+# OS independent installs: nvm, node, yarn, browser-sync
+# -------------------------
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+nvm install --lts
+npm install -g yarn
+npm install -g browser-sync
+
+# -------------------------
+# Configure chezmoi repo to use SSH
+# -------------------------
 cd ~/.local/share/chezmoi
 git remote set-url origin git@github.com:justjcurtis/dotfiles.git
 cd -
