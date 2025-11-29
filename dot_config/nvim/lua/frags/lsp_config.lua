@@ -1,3 +1,39 @@
+-- Setup global LSP configuration for Neovim 0.10+
+vim.lsp.config("*", {
+    flags = {
+        debounce_text_changes = 150,
+    },
+})
+
+-- Setup mason for package management
+require('mason').setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
+    }
+})
+
+local mason_lspconfig = require('mason-lspconfig')
+
+-- Setup servers to install
+local mason_servers = {
+    "lua_ls",
+    "gopls",
+    "vtsls",
+}
+
+mason_lspconfig.setup({
+    ensure_installed = mason_servers,
+    automatic_installation = true,
+})
+
+-- Enable all LSP servers using the new core approach
+vim.lsp.enable(mason_servers)
+
+-- Function to set up keymaps for LSP
 local on_attach = function(client, bufnr)
     -- Your existing keymaps and setup
     local nmap = function(keys, func, desc)
@@ -31,61 +67,6 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
         vim.lsp.buf.format()
     end, { desc = 'Format current buffer with LSP' })
-end
-
--- Setup capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
--- Setup mason for package management
-require('mason').setup({
-    ui = {
-        icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
-        }
-    }
-})
-
-local mason_lspconfig = require('mason-lspconfig')
-
--- Setup servers to install
-local mason_servers = {
-    "lua_ls",
-    "gopls",
-    "vtsls",
-}
-
-mason_lspconfig.setup({
-    ensure_installed = mason_servers,
-    automatic_installation = true,
-})
-
--- Setup each server using the traditional approach for compatibility
-local servers = {
-    lua_ls = {
-        Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-        },
-    },
-    gopls = {
-        analyses = {
-            unusedparams = true,
-        },
-        staticcheck = true,
-    },
-    vtsls = {},
-}
-
-for server_name, server_opts in pairs(servers) do
-    if type(server_opts) == 'table' then
-        server_opts.on_attach = on_attach
-        server_opts.capabilities = capabilities
-        -- Use the approach that works with your Neovim version
-        require('lspconfig')[server_name].setup(server_opts)
-    end
 end
 
 -- Setup nvim-cmp
@@ -137,6 +118,14 @@ cmp.setup {
         { name = 'luasnip' },
     },
 }
+
+-- Set up global LSP configuration with on_attach
+vim.lsp.config("*", {
+    flags = {
+        debounce_text_changes = 150,
+    },
+    on_attach = on_attach,
+})
 
 return {}
 
