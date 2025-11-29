@@ -163,6 +163,12 @@ require('lazy').setup({
             temperature = 0,
           },
         },
+        qwen3coder = {
+          __inherited_from = "openai",
+          api_key_name = "LMSTUDIO_API_KEY",
+          endpoint = "https://justjcurtis.a.pinggy.link/v1",
+          model = "qwen3-coder-30b",
+  	},
       },
       behaviour = {
         auto_suggestions = false, -- Experimental stage
