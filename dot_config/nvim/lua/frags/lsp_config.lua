@@ -1,4 +1,5 @@
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
+    -- Your existing keymaps and setup
     local nmap = function(keys, func, desc)
         if desc then
             desc = 'LSP: ' .. desc
@@ -32,25 +33,11 @@ local on_attach = function(_, bufnr)
     end, { desc = 'Format current buffer with LSP' })
 end
 
-local servers = {
-    templ = {},
-    rust_analyzer = {},
-    lua_ls = {
-        Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-        },
-    },
-}
-
--- Setup neovim lua configuration
-require('neodev').setup()
-
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+-- Setup capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
--- Ensure the servers above are installed
+-- Setup mason for package management
 require('mason').setup({
     ui = {
         icons = {
@@ -63,11 +50,11 @@ require('mason').setup({
 
 local mason_lspconfig = require('mason-lspconfig')
 
--- Ensure servers are installed
+-- Setup servers to install
 local mason_servers = {
     "lua_ls",
-    "rust_analyzer",
-    "templ"
+    "gopls",
+    "vtsls",
 }
 
 mason_lspconfig.setup({
@@ -75,15 +62,33 @@ mason_lspconfig.setup({
     automatic_installation = true,
 })
 
--- Setup each server
+-- Setup each server using the traditional approach for compatibility
+local servers = {
+    lua_ls = {
+        Lua = {
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+        },
+    },
+    gopls = {
+        analyses = {
+            unusedparams = true,
+        },
+        staticcheck = true,
+    },
+    vtsls = {},
+}
+
 for server_name, server_opts in pairs(servers) do
-    server_opts.on_attach = on_attach
-    server_opts.capabilities = capabilities
-    require('lspconfig')[server_name].setup(server_opts)
+    if type(server_opts) == 'table' then
+        server_opts.on_attach = on_attach
+        server_opts.capabilities = capabilities
+        -- Use the approach that works with your Neovim version
+        require('lspconfig')[server_name].setup(server_opts)
+    end
 end
 
--- [[ Configure nvim-cmp ]]
--- See `:help cmp`
+-- Setup nvim-cmp
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
@@ -134,3 +139,4 @@ cmp.setup {
 }
 
 return {}
+
