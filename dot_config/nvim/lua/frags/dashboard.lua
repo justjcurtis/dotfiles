@@ -63,7 +63,7 @@ return {
             { section = "startup", padding = 2 },
             {
                 section = "terminal",
-                cmd = "/bin/bash -lc 'jea'; sleep 0.1",
+                cmd = "/bin/zsh -lc 'jea'; sleep 0.1",
                 height = 22,
                 indent = 25,
             }
