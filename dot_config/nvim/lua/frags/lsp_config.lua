@@ -116,7 +116,11 @@ cmp.setup {
     sources = {
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
+        --{ name = 'minuet' },
     },
+    -- performance = {
+    --     fetching_timeout = 2000,
+    -- },
 }
 
 -- Set up global LSP configuration with on_attach
@@ -128,4 +132,3 @@ vim.lsp.config("*", {
 })
 
 return {}
-

@@ -7,20 +7,27 @@ vim.api.nvim_create_user_command("Format", function()
   vim.lsp.buf.format()
 end, {})
 
--- Install package manager
---    https://github.com/folke/lazy.nvim
---    `:help lazy.nvim.txt` for more info
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+-- Install package manager: lazy.nvim (pinned for Neovim 0.11)
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazy_commit = "306a055" -- known-good from your other laptop
+
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system {
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
     lazypath,
-  }
+  })
+  vim.fn.system({
+    "git",
+    "-C",
+    lazypath,
+    "checkout",
+    lazy_commit,
+  })
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 -- NOTE: Here is where you install your plugins.
@@ -80,6 +87,14 @@ require('lazy').setup({
   },
 
   {
+    'nvim-java/nvim-java',
+    config = function()
+      require('java').setup()
+      vim.lsp.enable('jdtls')
+    end,
+  },
+
+  {
     event = "VeryLazy",
     lazy = true,
     -- Autocompletion
@@ -100,169 +115,58 @@ require('lazy').setup({
     end
   },
 
-  -- markdown renderer for codecompanion
   {
-    "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "markdown", "codecompanion" }
-  },
-
-  -- avante for cursor like ai
-  {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    lazy = true,
-    version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
-    opts = {
-      auto_suggestions_provider = "qwen3coder",
-      provider = "qwen3coder",
-      cursor_applying_provider = "qwen3coder",
-      providers = {
-        claude4 = {
-          __inherited_from = "claude",
-          api_key_name = "ANTHROPIC_API_KEY",
-          endpoint = "https://api.anthropic.com",
-          model = "claude-sonnet-4-20250514",
-          extra_request_body = {
-            temperature = 0,
-          },
-        },
-        qwen3coder = {
-          __inherited_from = "openai",
-          api_key_name = "LMSTUDIO_API_KEY",
-          endpoint = "https://justjcurtis.a.pinggy.link/v1",
-          model = "qwen3-coder-30b",
-        },
-      },
-      behaviour = {
-        auto_suggestions = false, -- Experimental stage
-        auto_set_highlight_group = true,
-        auto_set_keymaps = true,
-        auto_apply_diff_after_generation = false,
-        support_paste_from_clipboard = false,
-        minimize_diff = true,               -- Whether to remove unchanged lines when applying a code block
-        enable_token_counting = true,       -- Whether to enable token counting. Default to true.
-        enable_claude_text_editor_tool_mode = true,
-        enable_cursor_planning_mode = true, -- Whether to enable cursor planning mode
-      },
-      mappings = {
-        diff = {
-          ours = "co",
-          theirs = "ct",
-          all_theirs = "cs",
-          both = "cb",
-          cursor = "cc",
-          next = "]x",
-          prev = "[x",
-        },
-        suggestion = {
-          accept = "<M-l>",
-          next = "<M-]>",
-          prev = "<M-[>",
-          dismiss = "<C-]>",
-        },
-        jump = {
-          next = "]]",
-          prev = "[[",
-        },
-        submit = {
-          normal = "<CR>",
-          insert = "<C-s>",
-        },
-        sidebar = {
-          apply_all = "A",
-          apply_cursor = "a",
-          switch_windows = "<Tab>",
-          reverse_switch_windows = "<S-Tab>",
-        },
-      },
-      hints = { enabled = true },
-      windows = {
-        ---@type "right" | "left" | "top" | "bottom"
-        position = "right", -- the position of the sidebar
-        wrap = true,        -- similar to vim.o.wrap
-        width = 30,         -- default % based on available width
-        sidebar_header = {
-          enabled = true,   -- true, false to enable/disable the header
-          align = "center", -- left, center, right for title
-          rounded = true,
-        },
-        input = {
-          prefix = "> ",
-          height = 8, -- Height of the input window in vertical layout
-        },
-        edit = {
-          border = "rounded",
-          start_insert = true, -- Start insert mode when opening the edit window
-        },
-        ask = {
-          floating = false,    -- Open the 'AvanteAsk' prompt in a floating window
-          start_insert = true, -- Start insert mode when opening the ask window
-          border = "rounded",
-          ---@type "ours" | "theirs"
-          focus_on_apply = "ours", -- which diff to focus after applying
-        },
-      },
-      highlights = {
-        diff = {
-          current = "DiffText",
-          incoming = "DiffAdd",
-        },
-      },
-      diff = {
-        autojump = true,
-        list_opener = "copen",
-        --- Override the 'timeoutlen' setting while hovering over a diff (see :help timeoutlen).
-        --- Helps to avoid entering operator-pending mode with diff mappings starting with `c`.
-        --- Disable by setting to -1.
-        override_timeoutlen = 500,
-      },
-      suggestion = {
-        debounce = 600,
-        throttle = 600,
-      },
-    },
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make",
-    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-    dependencies = {
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      --- The below dependencies are optional,
-      "echasnovski/mini.pick",         -- for file_selector provider mini.pick
-      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-      "hrsh7th/nvim-cmp",              -- autocompletion for avante commands and mentions
-      "ibhagwan/fzf-lua",              -- for file_selector provider fzf
-      "nvim-tree/nvim-web-devicons",   -- or echasnovski/mini.icons
-      "zbirenbaum/copilot.lua",        -- for providers='copilot'
-      {
-        -- support for image pasting
-        "HakonHarnes/img-clip.nvim",
-        event = "VeryLazy",
-        opts = {
-          -- recommended settings
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
+    'milanglacier/minuet-ai.nvim',
+    config = function()
+      require('minuet').setup {
+        duet = {
+          provider = 'openai',
+          provider_options = {
+            openai = {
+              model = 'gemma4_26b',
+              api_key = 'TERM',
+              end_point = 'http://localhost:8080/v1/chat/completions',
             },
-            -- required for Windows users
-            use_absolute_path = true,
           },
         },
-      },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          file_types = { "markdown", "Avante" },
+        provider = 'openai_fim_compatible',
+        n_completions = 1,
+        context_window = 512,
+        provider_options = {
+          openai_fim_compatible = {
+            api_key = 'TERM',
+            name = 'Llama.cpp',
+            end_point = 'http://localhost:8080/v1/completions',
+            model = 'gemma4_26b',
+            optional = {
+              max_tokens = 56,
+              top_p = 0.9,
+            },
+            template = {
+              prompt = function(context_before_cursor, context_after_cursor, _)
+                return '<|fim_prefix|>'
+                    .. context_before_cursor
+                    .. '<|fim_suffix|>'
+                    .. context_after_cursor
+                    .. '<|fim_middle|>'
+              end,
+              suffix = false,
+            },
+          },
         },
-        ft = { "markdown", "Avante" },
-      },
-    },
+      }
+    end,
   },
 
+  {
+    -- Make sure to set this up properly if you have lazy=true
+    'MeanderingProgrammer/render-markdown.nvim',
+    opts = {
+      file_types = { "markdown", "codecompanion" },
+    },
+    ft = { "markdown", "codecompanion" },
+  },
+  --
   -- obsidian
   {
     "epwalsh/obsidian.nvim",
@@ -441,6 +345,7 @@ require('lazy').setup({
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
+    branch = "master",
     build = ':TSUpdate',
     config = function()
       require('frags.treesitter')
@@ -479,15 +384,20 @@ require('lazy').setup({
 
   -- markdown previewer
   {
+    -- Install markdown preview, use npx if available.
     "iamcco/markdown-preview.nvim",
-    ft = "markdown", -- load only for markdown files
-    lazy = true,
-    build = function()
-      vim.fn["mkdp#util#install"]()
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function(plugin)
+      if vim.fn.executable "npx" then
+        vim.cmd("!cd " .. plugin.dir .. " && cd app && npx --yes yarn install")
+      else
+        vim.cmd [[Lazy load markdown-preview.nvim]]
+        vim.fn["mkdp#util#install"]()
+      end
     end,
     init = function()
-      vim.g.mkdp_auto_start = 0
-      vim.g.mkdp_auto_close = 1
+      if vim.fn.executable "npx" then vim.g.mkdp_filetypes = { "markdown" } end
     end,
   },
 

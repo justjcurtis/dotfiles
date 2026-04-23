@@ -2,10 +2,12 @@ return {
     event = "VeryLazy",
     lazy = true,
     "olimorris/codecompanion.nvim",
-    version = "v17.33.0",
+    version = "v19.11.0",
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
+        lazy = false,
+        build = ":TSUpdate",
     },
     opts = {
         display = {
@@ -56,22 +58,44 @@ return {
                 end,
             },
         },
-        strategies = {
+        adapters = {
+            http = {
+                ["llama.cpp"] = function()
+                    return require("codecompanion.adapters").extend("openai_compatible", {
+                        env = {
+                            url = "http://127.0.0.1:8080",
+                            api_key = "NOT_REQUIRED",
+                            chat_url = "/v1/chat/completions",
+                        },
+                    })
+                end,
+            },
+        },
+        interactions = {
             chat = {
-                adapter = "anthropic",
-                tools = {
-                    opts = {
-                        auto_submit_errors = true,
-                        auto_submit_success = true,
-                    },
-                }
+                adapter = {
+                    name = "llama.cpp",
+                    model = "gemma4_26b",
+                },
             },
             inline = {
-                adapter = "anthropic",
+                adapter = {
+                    name = "llama.cpp",
+                    model = "gemma4_26b",
+                },
             },
             cmd = {
-                adapter = "anthropic",
-            }
+                adapter = {
+                    name = "llama.cpp",
+                    model = "gemma4_26b",
+                },
+            },
+            background = {
+                adapter = {
+                    name = "llama.cpp",
+                    model = "gemma4_26b",
+                },
+            },
         },
     }
 }

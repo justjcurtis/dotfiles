@@ -32,9 +32,61 @@ vim.keymap.set("n", "<leader>f", ":Format<CR>", { silent = true })
 vim.keymap.set("n", "<leader>,", ":let @+ = expand ('%:p')<CR>", { silent = true })
 vim.keymap.set("n", "<leader>-", ":bp<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>cca", ":CodeCompanionActions<CR>", { silent = true })
-vim.keymap.set("n", "<leader>ccc", ":CodeCompanionChat Toggle<CR>", { silent = true })
-vim.keymap.set("n", "<leader>ccd", ":CodeCompanionChat Add<CR>", { silent = true })
+vim.keymap.set("n", "<C-]>", ":CodeCompanionChat Add<CR>", { silent = true })
+vim.keymap.set({ "n", "v" }, "<C-c>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "<LocalLeader>a", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+
+function run_codecompanion_task(prompt)
+    vim.cmd(string.format("CodeCompanion #{buffer} %s", prompt))
+end
+
+function get_user_prompt(opts, callback)
+    local was_visual = vim.fn.mode():match("[vV]")
+    opts = opts or {}
+
+    vim.ui.input({
+        prompt = opts.prompt or "Enter prompt: ",
+        default = opts.default or "",
+    }, function(input)
+        if not input or input == "" then
+            return
+        end
+        if was_visual then
+            vim.cmd("normal! gv")
+        end
+        callback(input)
+    end)
+end
+
+vim.keymap.set({ 'n', 'v' }, '<leader>j', function()
+    run_codecompanion_task("complete this.")
+end, { desc = "CodeCompanion: Complete" })
+
+vim.keymap.set({ "n", "v" }, '<leader>k', function()
+    run_codecompanion_task("fix this.")
+end, { desc = "CodeCompanion: Fix" })
+
+vim.keymap.set({ "n", "v" }, '<leader>l', function()
+    run_codecompanion_task("refactor this.")
+end, { desc = "CodeCompanion: Refactor selection" })
+
+vim.keymap.set({ "n", "v" }, '<leader>m', function()
+    run_codecompanion_task("explain this.")
+end, { desc = "CodeCompanion: explain selection" })
+
+vim.keymap.set({ "n", "v" }, '<leader>C', function()
+    get_user_prompt(
+        { prompt = "CodeCompanion prompt: " },
+        function(user_prompt)
+            run_codecompanion_task(user_prompt)
+        end
+    )
+end, { desc = "CodeCompanion: custom" })
+
+
+-- Expand 'cc' into 'CodeCompanion' in the command line
+vim.cmd([[cab cc CodeCompanion]])
 
 vim.api.nvim_set_keymap('n', '<leader>[', [[:lua ToggleCheckbox()<CR>]], { noremap = true, silent = true })
 
