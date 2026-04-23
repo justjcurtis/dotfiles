@@ -34,7 +34,7 @@ vim.keymap.set("n", "<leader>-", ":bp<CR>", { silent = true })
 
 vim.keymap.set("n", "<C-]>", ":CodeCompanionChat Add<CR>", { silent = true })
 vim.keymap.set({ "n", "v" }, "<C-c>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
-vim.keymap.set({ "n", "v" }, "C-x", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "<leader><CR>", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
 vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
 
 function run_codecompanion_task(prompt)
@@ -69,11 +69,11 @@ end, { desc = "CodeCompanion: Fix" })
 
 vim.keymap.set({ "n", "v" }, '<leader>l', function()
     run_codecompanion_task("refactor this.")
-end, { desc = "CodeCompanion: Refactor selection" })
+end, { desc = "CodeCompanion: Refactor" })
 
 vim.keymap.set({ "n", "v" }, '<leader>m', function()
     run_codecompanion_task("explain this.")
-end, { desc = "CodeCompanion: explain selection" })
+end, { desc = "CodeCompanion: Explain" })
 
 vim.keymap.set({ "n", "v" }, '<leader>C', function()
     get_user_prompt(
@@ -82,7 +82,7 @@ vim.keymap.set({ "n", "v" }, '<leader>C', function()
             run_codecompanion_task(user_prompt)
         end
     )
-end, { desc = "CodeCompanion: custom" })
+end, { desc = "CodeCompanion: Custom" })
 
 
 -- Expand 'cc' into 'CodeCompanion' in the command line

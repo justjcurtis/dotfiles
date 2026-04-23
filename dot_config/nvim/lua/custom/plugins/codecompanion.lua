@@ -60,41 +60,48 @@ return {
         },
         adapters = {
             http = {
-                ["llama.cpp"] = function()
+                lmstudio = function()
                     return require("codecompanion.adapters").extend("openai_compatible", {
                         env = {
-                            url = "http://127.0.0.1:8080",
-                            api_key = "NOT_REQUIRED",
+                            url = "https://justjcurtis.a.pinggy.link",
+                            api_key = "LMSTUDIO_API_KEY",
                             chat_url = "/v1/chat/completions",
                         },
+                        opts = {
+                            show_model_choices = true,
+                        },
+                        schema = {
+                            model = {
+                                order = 1,
+                                mapping = "parameters",
+                                type = "enum",
+                                desc =
+                                "ID of the model to use. See the model endpoint compatibility table for details on which models work with the Chat API.",
+                                ---@type string|fun(): string
+                                default = "qwopus3.5-27b-v3.5",
+                                choices = {
+                                    ["google/gemma-4-26b-a4b"] = { opts = { can_reason = true } },
+                                    ["qwopus3.5-27b-v3.5"] = { opts = { can_reason = true } },
+                                },
+                            },
+                        }
+
                     })
                 end,
             },
         },
         interactions = {
             chat = {
-                adapter = {
-                    name = "llama.cpp",
-                    model = "gemma4_26b",
-                },
+                adapter = "lmstudio",
             },
             inline = {
-                adapter = {
-                    name = "llama.cpp",
-                    model = "gemma4_26b",
-                },
+                adapter = "lmstudio",
             },
             cmd = {
-                adapter = {
-                    name = "llama.cpp",
-                    model = "gemma4_26b",
-                },
+                adapter = "lmstudio",
             },
             background = {
-                adapter = {
-                    name = "llama.cpp",
-                    model = "gemma4_26b",
-                },
+                adapter = "lmstudio",
             },
         },
     }
