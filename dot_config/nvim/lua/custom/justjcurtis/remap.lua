@@ -34,7 +34,7 @@ vim.keymap.set("n", "<leader>-", ":bp<CR>", { silent = true })
 
 vim.keymap.set("n", "<C-]>", ":CodeCompanionChat Add<CR>", { silent = true })
 vim.keymap.set({ "n", "v" }, "<C-c>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
-vim.keymap.set({ "n", "v" }, "<LocalLeader>a", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "C-x", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
 vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
 
 function run_codecompanion_task(prompt)
