@@ -60,6 +60,37 @@ return {
         },
         adapters = {
             http = {
+                llama = function()
+                    return require("codecompanion.adapters").extend("openai_compatible", {
+                        env = {
+                            url = "http://127.0.0.1:8080",
+                            api_key = "NOT_REQUIRED",
+                            chat_url = "/v1/chat/completions",
+                        },
+                        opts = {
+                            show_model_choices = true,
+                        },
+                        schema = {
+                            model = {
+                                order = 1,
+                                mapping = "parameters",
+                                type = "enum",
+                                desc =
+                                "ID of the model to use. See the model endpoint compatibility table for details on which models work with the Chat API.",
+                                ---@type string|fun(): string
+                                default = "gemma4_26b",
+                                choices = {
+                                    ["qwopus_35_r"] = { opts = { can_reason = true } },
+                                    ["gemma4_26b_r"] = { opts = { can_reason = true } },
+                                    ["qwen_36_27b_r"] = { opts = { can_reason = true } },
+                                    ["qwopus_35"] = { opts = { can_reason = false } },
+                                    ["gemma4_26b"] = { opts = { can_reason = false } },
+                                    ["qwen_36_27b"] = { opts = { can_reason = false } },
+                                },
+                            },
+                        }
+                    })
+                end,
                 lmstudio = function()
                     return require("codecompanion.adapters").extend("openai_compatible", {
                         env = {
@@ -92,16 +123,16 @@ return {
         },
         interactions = {
             chat = {
-                adapter = "lmstudio",
+                adapter = "llama",
             },
             inline = {
-                adapter = "lmstudio",
+                adapter = "llama",
             },
             cmd = {
-                adapter = "lmstudio",
+                adapter = "llama",
             },
             background = {
-                adapter = "lmstudio",
+                adapter = "llama",
             },
         },
     }
